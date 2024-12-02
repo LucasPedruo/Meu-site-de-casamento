@@ -1,26 +1,10 @@
-<nav>
-    <section>
-        <img src="" alt="Logo-larissa-e-lucas">
-    </section>
-    <section>
-
-<ul>
-    <li><a routerLink="/inicio" routerLinkActive="active">Início</a></li>
-    <li><a routerLink="/lista-de-presente" routerLinkActive="active">Lista de presentes</a></li>
-    <li><a routerLink="/cerimonia-e-festa" routerLinkActive="active">Cerimônia e festa</a></li>
-    <li><a routerLink="/confirmacao-de-presenca" routerLinkActive="active">Confirme sua presença</a></li>
-    <li><a routerLink="/sugestao-de-traje" routerLinkActive="active">Sugestão de traje</a></li>
-  </ul>
-  
-    </section>
-</nav>
-
 <header>
-    <div>
-        <hr>
+    <div class="diasfaltantes">
+        <hr class="hr1">
         {{dataFormatada}}
-        <hr>
-        <p>Faltam {{diasRestantes}} dias</p>
+        <hr class="hr2">
+        Faltam {{diasRestantes}} dias   
+        <hr class="hr1">
     </div>
 
     <h1>LARISSA & LUCAS</h1>
@@ -30,53 +14,57 @@
     </p>
 </header>
 
-<section class="container-evento">
-    <p>EVENTO</p>
+<div class="body">
 
-    <h3>Cerimônia & Festa</h3>
+    <section class="container-evento">
+        <p>EVENTO</p>
 
-    <div class="icone-evento">
-        <span class="icon">
-            <img src="" alt="icone de calendario">
-        </span>
-        <p>18 de maio de 2025 - 15:30</p>
-    </div>
+        <h3>Cerimônia & Festa</h3>
 
-    <div class="icone-evento">
-        <span class="icon">
-            <img src="" alt="icone de localização">
-        </span>
-        <p>Rua da Jaqueira, 110 - Vargem Grande - RJ</p>
-    </div>
+        <div class="icone-evento">
+            <span class="icon">
+                <img src="">
+            </span>
+            <p>18 de maio de 2025 - 15:30</p>
+        </div>
 
-    <button>
-        ABRIR NO MAPS
-    </button>
+        <div class="icone-evento">
+            <span class="icon">
+                <img src="">
+            </span>
+            <p>Rua da Jaqueira, 110 - Vargem Grande - RJ</p>
+        </div>
 
-    <button>
-        ADICIONAR À AGENDA
-    </button>
-</section>
-
-<section class="container-duplo">
-    <section class="box-presentes">
-        <p>Lista de presentes</p>
-
-        <p></p>
         <button>
-            PRESENTEAR
+            ABRIR NO MAPS
+        </button>
+
+        <button>
+            ADICIONAR À AGENDA
         </button>
     </section>
 
-    <section class="box-sujestao-de-traje">
-        <p class="subtitulo-box">DRESS CODE</p>
-        <h3>Sugestão de Traje</h3>
+    <section class="container-duplo">
+        <section class="box-presentes">
+            <p>Lista de presentes</p>
 
-        <p>
-            Texto da sujestao
-        </p>
-        <button>
-            CONTINUAR LENDO
-        </button>
+            <p></p>
+            <button>
+                PRESENTEAR
+            </button>
+        </section>
+
+        <section class="box-sujestao-de-traje">
+            <p class="subtitulo-box">DRESS CODE</p>
+            <h3>Sugestão de Traje</h3>
+
+            <p>
+                Texto da sujestao
+            </p>
+            <button>
+                CONTINUAR LENDO
+            </button>
+        </section>
     </section>
-</section>
+
+</div>
