@@ -43,6 +43,7 @@ main {
         .buttons {
             display: flex;
             gap: 5px;
+            flex-wrap: wrap;
 
             button {
                 padding: 10px 20px;
@@ -120,6 +121,5 @@ main {
                 }
             }
         }
-
     }
 }

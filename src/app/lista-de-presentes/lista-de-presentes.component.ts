@@ -12,7 +12,6 @@ import { Component } from '@angular/core';
 })
 export class ListaDePresentesComponent {
 
-  buttonActive = 'all'; 
 
   items = [
     { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'sofa.jpg' },
@@ -21,12 +20,17 @@ export class ListaDePresentesComponent {
     { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg' },
   ];
 
-  filteredItems = [...this.items];
+  buttonActive: string = 'all'; 
+
+  filteredItems: any[] = this.items; 
 
   filterItems(category: string) {
-    this.filteredItems = category === 'all' 
-      ? this.items 
-      : this.items.filter(item => item.category === category);
+    this.buttonActive = category;
+    if (category === 'all') {
+      this.filteredItems = this.items; 
+    } else {
+      this.filteredItems = this.items.filter(item => item.category === category);
+    }
   }
 
   buyItem(item: any) {
