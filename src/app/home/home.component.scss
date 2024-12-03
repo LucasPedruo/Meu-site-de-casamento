@@ -44,7 +44,7 @@ header {
     }
 }
 
-.body {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,19 +59,38 @@ header {
         flex-direction: column;
         gap: 20px;
 
-        p{
+        p {
             color: rgb(102, 102, 102);
-            margin-bottom: -10px  ;
+            margin-bottom: -10px;
+            font-size: 12px;
         }
 
-        .icone-evento{
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        h3 {
+            font-family: 'rubik', sans-serif;
+            font-family: 18px;
+        }
 
-            .icon{
-                background-color: rgb(235, 235, 235);
-                border: solid 1px rgb(210, 210, 210);
+        .icone-evento {
+            display: flex;
+            gap: 20px;
+            text-align: center;
+            align-items: center;
+
+            p {
+                margin: 0;
+                padding: 0;
+                height: fit-content;
+                font-size: 14px;
+                font-family: 'rubik', sans-serif;
+            }
+
+            span {
+                font-size: 15px;
+                color: #3A3D47;
+            }
+
+            .icon {
+                background-color: #F4F5F7;
                 border-radius: 100%;
                 padding: 10px;
                 max-width: 30px;
@@ -79,13 +98,30 @@ header {
                 display: flex;
                 align-items: center;
                 justify-content: center;
- 
-                img{
-                    width: 10px;
-                    height: 10px;
+
+                &::after{
+                    content: "---";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    transition: 0.5s;
                 }
             }
         }
-    }
 
+        button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 15px 0px;
+
+            &:hover{
+                background-color:rgb(31, 31, 31) ;
+                transition: 0.5s;
+            }
+        }
+    }
 }
