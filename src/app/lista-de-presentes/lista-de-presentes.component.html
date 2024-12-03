@@ -1,1 +1,50 @@
-<p>lista-de-presentes works!</p>
+<header>
+
+    <div class="box-content">
+        <h1>Lista de presentes</h1>
+
+        <p>
+            "Deus uniu nossos caminhos e nós, sob sua benção, uniremos nossas vidas para sempre."
+        </p>
+    </div>
+
+</header>
+
+<main>
+    <section class="content">
+        <div class="buttons">
+            <button (click)="filterItems('all')"
+                [ngClass]="{'dark': buttonActive === 'all', 'transparente': buttonActive !== 'all'}">
+                <span class="material-icons">select_all</span>
+                <p>Todos</p>
+            </button>
+            <button (click)="filterItems('casa')"
+                [ngClass]="{'dark': buttonActive === 'casa', 'transparente': buttonActive !== 'casa'}">
+                <span class="material-icons">home</span>
+                Casa
+            </button>
+            <button (click)="filterItems('lua_de_mel')"
+                [ngClass]="{'dark': buttonActive === 'lua_de_mel', 'transparente': buttonActive !== 'lua_de_mel'}">
+                <span class="material-icons">location_on</span>
+                Lua de Mel
+            </button>
+            <button (click)="filterItems('criativos')"
+                [ngClass]="{'dark': buttonActive === 'criativos', 'transparente': buttonActive !== 'criativos'}">
+                <span class="material-icons">lightbulb</span>
+                Criativos
+            </button>
+        </div>
+
+        <div class="items">
+            <div *ngFor="let item of filteredItems" class="item">
+                <img [src]="item.image" alt="{{item.title}}">
+                <div class="info">
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.price | currency:'BRL'}}</p>
+                </div>
+                <button (click)="buyItem(item)">COMPRAR</button>
+            </div>
+        </div>
+
+    </section>
+</main>
