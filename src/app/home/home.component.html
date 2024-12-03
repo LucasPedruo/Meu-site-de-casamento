@@ -3,7 +3,7 @@
         <hr class="hr1">
         {{dataFormatada}}
         <hr class="hr2">
-        Faltam {{diasRestantes}} dias   
+        Faltam {{diasRestantes}} dias
         <hr class="hr1">
     </div>
 
@@ -14,52 +14,62 @@
     </p>
 </header>
 
-<main >
+<main>
 
     <section class="container-evento">
         <p>EVENTO</p>
 
         <h3>Cerimônia & Festa</h3>
 
-        <div class="icone-evento">
-            <span class="icon">
-                <span class="material-icons">calendar_month</span>
-            </span>
-            <p>18 de maio de 2025 - 15:30</p>
+        <div class="box-icones">
+
+            <div class="icone">
+                <span class="icon_com_dot">
+                    <span class="material-icons">calendar_month</span>
+                </span>
+                <p>16 de maio de 2025 - 15:30</p>
+            </div>
+
+            <div class="icone">
+                <span class="icon">
+                    <span class="material-icons">pin_drop</span>
+                </span>
+                <p> Caminho do Cafua, 480 - Guaratiba, Rio de Janeiro - RJ, 23020-222</p>
+            </div>
+
         </div>
 
-        <div class="icone-evento">
-            <span class="icon">
-                <span class="material-icons">pin_drop</span>
-            </span>
-            <p>Rua da Jaqueira, 110 - Vargem Grande - RJ</p>
-        </div>
 
-        <button>
+        <a href="https://www.google.com/maps?sca_esv=a257fc97035ed9c3&sxsrf=ADLYWIIwZB_NvWKY8kU7R9cmJSHl0M17Ug:1733185902559&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2FsZW0gZG9zIHNvbmhvcyoCCAAyDhAuGIAEGNQCGMcBGK8BMggQLhiABBjUAjIFEAAYgAQyBRAuGIAEMggQLhiABBjUAjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMggQABgWGAoYHjIdEC4YgAQY1AIYxwEYrwEYlwUY3AQY3gQY4ATYAQFI_h9QkwdYrBlwAXgBkAEAmAGQAqAB3hOqAQYwLjE0LjG4AQPIAQD4AQGYAhCgApgVwgIKEAAYsAMY1gQYR8ICChAjGIAEGCcYigXCAgQQIxgnwgIREC4YgAQYsQMY0QMYgwEYxwHCAg4QLhiABBixAxiDARiKBcICCxAuGIAEGLEDGIMBwgIOEAAYgAQYsQMYgwEYigXCAg4QLhiABBixAxjRAxjHAcICChAAGIAEGEMYigXCAhAQLhiABBhDGMcBGIoFGK8BwgIIEC4YgAQYsQPCAhAQABiABBixAxhDGIMBGIoFwgITEC4YgAQYFBiHAhjHARiOBRivAcICCxAAGIAEGLEDGIMBwgIKEAAYgAQYFBiHAsICCBAAGIAEGLEDwgILEC4YgAQYsQMY1ALCAg0QLhiABBixAxhDGIoFwgILEC4YgAQYxwEYrwHCAhQQLhiABBiXBRjcBBjeBBjgBNgBAZgDAIgGAZAGCLoGBggBEAEYFJIHBjEuMTMuMqAHo_8B&um=1&ie=UTF-8&fb=1&gl=br&sa=X&geocode=KQv5nLya6JsAMZJ0swJ35kdV&daddr=Caminho+do+Cafua,+480+-+Guaratiba,+Rio+de+Janeiro+-+RJ,+23020-222"
+            target="_blank" rel="noopener noreferrer">
             ABRIR NO MAPS
-        </button>
+        </a>
+
     </section>
 
     <section class="container-duplo">
+
         <section class="box-presentes">
-            <p>Lista de presentes</p>
+            <h3 class="h3_presentes">Lista de presentes</h3>
 
             <p></p>
-            <button>
+            <a>
                 PRESENTEAR
-            </button>
+            </a>
         </section>
 
         <section class="box-sujestao-de-traje">
-            <p class="subtitulo-box">DRESS CODE</p>
-            <h3>Sugestão de Traje</h3>
+            <div class="conteudo">
+                <p>DRESS CODE</p>
+                <h3>Sugestão de Traje</h3>
 
-            <p>
-                Texto da sujestao
-            </p>
-            <button>
-                CONTINUAR LENDO
-            </button>
+                <p class="texto-trajes">
+                    Texto da sujestao
+                </p>
+            </div>
+        
+            <a routerLink="/sugestao-de-traje" routerLinkActive="active">CONTINUAR LENDO</a>
+
         </section>
     </section>
 
