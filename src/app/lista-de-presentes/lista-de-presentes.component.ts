@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-lista-de-presentes',
     imports: [CommonModule,
-              dxPopupModule
+              
     ],
     standalone: true,
     templateUrl: './lista-de-presentes.component.html',
