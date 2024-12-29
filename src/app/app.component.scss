@@ -1,4 +1,3 @@
-
 nav {
     display: flex;
     justify-content: center;
@@ -6,9 +5,9 @@ nav {
     position: fixed;
     width: 100vw;
     z-index: 99999;
-     
-    
-    .content{
+
+
+    .content {
         width: 1200px;
         height: 80px;
         z-index: 100;
@@ -16,8 +15,8 @@ nav {
         align-items: center;
         justify-content: space-between;
 
-        .left{
-            .img{
+        .left {
+            .img {
                 width: 80px;
                 height: 80px;
                 background-image: url(../assets/images/logo-preta.png);
@@ -25,26 +24,33 @@ nav {
                 filter: invert(1);
             }
         }
-    
-        .right{
-    
+
+        .right {
+
             ul {
                 display: flex;
-                gap: 20px;
+                gap: 5px;
                 align-items: center;
                 justify-content: center;
                 margin: 0;
-                
-                li{
+
+                li {
                     list-style-type: none;
                     margin: 0;
                     padding: 0;
-        
-                    a{
+
+                    a {
                         font-size: 12px;
                         text-transform: uppercase;
                         color: white;
                         text-decoration: none;
+                        padding: 15px 20px;
+                        transition: 0.5s ease-in-out;
+
+                        &:hover {
+                            background-color: black;
+                            color: white;
+                        }
                     }
                 }
             }
@@ -54,14 +60,21 @@ nav {
 
 .scrolled {
     background-color: rgb(3, 3, 3);
-  }
-  
-  .transparent {
+
+    a {
+        &:hover {
+            background-color: white!important;
+            color: black!important;
+        }
+    }
+}
+
+.transparent {
     background-color: transparent;
     transition: background-color 0.3s ease;
-  }
-  
-  footer{
+}
+
+footer {
     background-color: rgb(245, 245, 245);
     border-top: solid 1px rgb(223, 222, 222);
     margin-top: 50px;
@@ -69,8 +82,8 @@ nav {
     text-align: center;
     padding: 20px;
     color: rgb(141, 141, 141);
-   
-    p{
+
+    p {
         font-size: 12px;
     }
 }
