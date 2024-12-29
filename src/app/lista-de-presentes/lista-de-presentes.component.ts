@@ -1,16 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog.component';
 
 @Component({
   selector: 'app-lista-de-presentes',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    CheckoutDialogComponent
   ],
   templateUrl: './lista-de-presentes.component.html',
   styleUrl: './lista-de-presentes.component.scss'
 })
 export class ListaDePresentesComponent {
+
+  constructor(private dialog: MatDialog) {}
 
  items = [
     { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'sofa.jpg', status: 'disponivel' },
@@ -59,7 +64,15 @@ export class ListaDePresentesComponent {
   }
 
   buyItem(item: any) {
+    const dialogRef = this.dialog.open(CheckoutDialogComponent, {
+      width: '500px',
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.success) {
+        console.log('Pagamento realizado com sucesso!', result.orderID);
+      }
+    });
   }
-
-
 }
