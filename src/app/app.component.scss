@@ -5,7 +5,8 @@ nav {
     max-height: 80px;
     position: fixed;
     width: 100vw;
-    font-family: 'rubik', sans-serif;
+    z-index: 99999;
+     
     
     .content{
         width: 1200px;
@@ -71,6 +72,5 @@ nav {
    
     p{
         font-size: 12px;
-        font-family: 'rubik', sans-serif;
     }
 }

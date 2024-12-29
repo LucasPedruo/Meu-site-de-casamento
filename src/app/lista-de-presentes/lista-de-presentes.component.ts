@@ -14,10 +14,27 @@ export class ListaDePresentesComponent {
 
 
   items = [
-    { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'sofa.jpg' },
-    { id: 2, title: 'Viagem para Paris', category: 'lua_de_mel', price: 10000, image: 'paris.jpg' },
-    { id: 3, title: 'Jogo de Panelas', category: 'casa', price: 500, image: 'panelas.jpg' },
-    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg' },
+    { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'sofa.jpg', status: 'disponivel'},
+    { id: 2, title: 'Viagem para Paris', category: 'lua_de_mel', price: 10000, image: 'paris.jpg', status: 'disponivel'},
+    { id: 3, title: 'Jogo de Panelas', category: 'casa', price: 500, image: 'panelas.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
+    { id: 4, title: 'Quadro Moderno', category: 'criativos', price: 300, image: 'quadro.jpg', status: 'disponivel'},
   ];
 
   buttonActive: string = 'all'; 
