@@ -1,8 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-lista-de-presentes',
+    imports: [
+        CommonModule
+    ],
+    standalone: true,
     templateUrl: './lista-de-presentes.component.html',
     styleUrl: './lista-de-presentes.component.scss'
 })
@@ -57,15 +62,6 @@ export class ListaDePresentesComponent {
   }
 
   buyItem(item: any) {
-    const dialogRef = this.dialog.open(CheckoutDialogComponent, {
-      width: '500px',
-      data: item
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result?.success) {
-        console.log('Pagamento realizado com sucesso!', result.orderID);
-      }
-    });
   }
 }

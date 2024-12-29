@@ -7,7 +7,9 @@ import { CommonModule } from '@angular/common';
     selector: 'app-root',
     imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+
 })
 export class AppComponent {
   title = 'Larissa e Lucas';
