@@ -5,6 +5,7 @@ import { CerimoniaEFestaComponent } from './cerimonia-e-festa/cerimonia-e-festa.
 import { SugestaoDeTrajeComponent } from './sugestao-de-traje/sugestao-de-traje.component';
 import { NgModule } from '@angular/core';
 import { ListaDePresentesComponent } from './lista-de-presentes/lista-de-presentes.component';
+import { PagamentosComponent } from './pagamentos/pagamentos.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'cerimonia-e-festa', component: CerimoniaEFestaComponent },
   { path: 'confirmacao-de-presenca', component: ConfirmacaoDePresencaComponent },
   { path: 'sugestao-de-traje', component: SugestaoDeTrajeComponent },
+  { path: 'pagamento', component: PagamentosComponent }
 ];
 
 @NgModule({
