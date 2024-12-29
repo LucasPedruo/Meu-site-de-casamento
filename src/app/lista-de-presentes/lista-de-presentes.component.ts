@@ -1,17 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog.component';
 
 @Component({
-  selector: 'app-lista-de-presentes',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CheckoutDialogComponent
-  ],
-  templateUrl: './lista-de-presentes.component.html',
-  styleUrl: './lista-de-presentes.component.scss'
+    selector: 'app-lista-de-presentes',
+    templateUrl: './lista-de-presentes.component.html',
+    styleUrl: './lista-de-presentes.component.scss'
 })
 export class ListaDePresentesComponent {
 
