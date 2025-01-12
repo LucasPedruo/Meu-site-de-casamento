@@ -37,14 +37,14 @@
 
         <div class="items">
             <div *ngFor="let item of filteredItems" class="item">
-                <img [src]="item.image" alt="{{item.title}}">
-                <div class="info">
-                    <h3>{{item.title}}</h3>
-                    <p>{{item.price | currency:'BRL'}}</p>
-                </div>
-                <button (click)="buyItem(item)">COMPRAR</button>
-
+              <img [src]="item.image" alt="{{item.title}}">
+              <div class="info">
+                <h3>{{item.title}}</h3>
+                <p>{{item.price | currency:'BRL'}}</p>
+              </div>
+              <button (click)="openBuyItemModal(item)">COMPRAR</button>
             </div>
-        </div>
+          </div>
+          
     </section>
 </main>
