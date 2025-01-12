@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-lista-de-presentes',
-    imports: [CommonModule,
-              
+    imports: [
+      CommonModule
     ],
     standalone: true,
     templateUrl: './lista-de-presentes.component.html',
@@ -14,6 +14,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class ListaDePresentesComponent {
 
   constructor(private router: Router) {}
+
+  popupVisible = false
 
  items = [
     { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'sofa.jpg', status: 'disponivel' },
@@ -62,6 +64,6 @@ export class ListaDePresentesComponent {
   }
 
   buyItem(item: any) {
-    this.router.navigate(['/pagamento'], { queryParams: { itemId: item.id } });
+    this.popupVisible = true;
   }
 }
