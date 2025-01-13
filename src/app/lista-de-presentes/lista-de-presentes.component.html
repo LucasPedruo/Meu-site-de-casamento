@@ -1,13 +1,10 @@
 <header>
-
     <div class="box-content">
         <h1>Lista de presentes</h1>
-
         <p>
             "Deus uniu nossos caminhos e nós, sob sua benção, uniremos nossas vidas para sempre."
         </p>
     </div>
-
 </header>
 
 <main>
@@ -37,14 +34,13 @@
 
         <div class="items">
             <div *ngFor="let item of filteredItems" class="item">
-              <img [src]="item.image" alt="{{item.title}}">
-              <div class="info">
-                <h3>{{item.title}}</h3>
-                <p>{{item.price | currency:'BRL'}}</p>
-              </div>
-              <button (click)="openBuyItemModal(item)">COMPRAR</button>
+                <img [src]="item.image" alt="{{item.title}}" class="item-image">
+                <div class="info">
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.price | currency:'BRL'}}</p>
+                </div>
+                <button (click)="openBuyItemModal(item)">COMPRAR</button>
             </div>
-          </div>
-          
+        </div>
     </section>
 </main>
