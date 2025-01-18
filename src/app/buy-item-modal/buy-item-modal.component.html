@@ -1,76 +1,57 @@
-<div class="modal-content">
-    <div *ngIf="paymentSuccess">
-      <div class="success-content">
-        <i class="material-icons success-icon">check_circle</i>
-        <h2>Pagamento Realizado com Sucesso!</h2>
-        <p>Obrigado por sua compra! Seu pedido foi confirmado.</p>
-      </div>
+<div class="modal-container">
+  <h2>Comprar {{ item?.title }}</h2>
+  
+  <div *ngIf="!paymentDataSubmitted" class="form-container">
+    <div class="form-group">
+      <label for="userName">Nome:</label>
+      <input 
+        id="userName"
+        type="text" 
+        [(ngModel)]="userName" 
+        placeholder="Seu nome completo"
+        required>
     </div>
 
-    <div *ngIf="!paymentSuccess">
-      <h2 class="modal-title">Confirmar Compra</h2>
-      
-      <div *ngIf="!paymentDataSubmitted" class="form-container">
-        <h3 class="form-title">Informe seus dados para continuar</h3>
-        <form (ngSubmit)="onSubmit()" #paymentForm="ngForm" class="payment-form">
-          <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" id="name" name="name" [(ngModel)]="userName" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="userEmail" required />
-          </div>
-          <button type="submit" mat-button [disabled]="!paymentForm.valid" class="submit-button">
-            Enviar
-          </button>
-        </form>
-      </div>
-
-      <!-- Tela de carregamento enquanto o PIX não é gerado -->
-      <div *ngIf="paymentDataSubmitted && !pixUrl" class="loading-container">
-        <p>Gerando QR Code do pagamento...</p>
-      </div>
-
-      <!-- Quando o PIX QR code estiver disponível -->
-      <div *ngIf="paymentDataSubmitted && pixUrl" class="pix-container">
-        <h3>Pagamento via PIX</h3>
-        <p>Use o QR code abaixo para pagar:</p>
-        <img [src]="pixUrl" alt="QR Code Pix" width="200" />
-        <div class="copy-container">
-          <input 
-            type="text" 
-            readonly 
-            [value]="pixcec" 
-            class="copy-input"
-          />
-          <button mat-button (click)="copyQRCode()" class="copy-button">
-            Copiar
-          </button>
-        </div>
-      </div>
-
-      <div *ngIf="paymentDataSubmitted && !pixUrl" class="mercadopago-container">
-        <h3>Pagamento via Mercado Pago</h3>
-      </div>
+    <div class="form-group">
+      <label for="userEmail">Email:</label>
+      <input 
+        id="userEmail"
+        type="email" 
+        [(ngModel)]="userEmail" 
+        placeholder="seu@email.com"
+        required>
     </div>
 
-    <div class="actions" *ngIf="!paymentSuccess">
-      <button 
-        mat-button 
-        *ngIf="!paymentDataSubmitted" 
-        (click)="closeModal()" 
-        class="cancel-button"
-      >
-        Cancelar
+    <button (click)="onSubmit()" [disabled]="!userName || !userEmail">
+      Continuar para pagamento
+    </button>
+  </div>
+
+  <div *ngIf="paymentDataSubmitted && !paymentSuccess" class="payment-options">
+    <h3>Escolha sua forma de pagamento:</h3>
+    
+    <div *ngIf="paymentUrl" class="payment-option">
+      <h4>Cartão de Crédito/Débito</h4>
+      <button (click)="redirectToPayment()">
+        Pagar com Mercado Pago
       </button>
-      <button 
-        mat-button 
-        *ngIf="pixUrl" 
-        (click)="redirectToSandbox()" 
-        class="alternate-payment-button"
-      >
-        Pagar de outra forma
-      </button>
+    </div>
+
+    <div *ngIf="pixUrl" class="payment-option">
+      <h4>PIX</h4>
+      <img [src]="pixUrl" alt="QR Code PIX" class="pix-qr-code">
+      <button (click)="copyPixCode()">Copiar Código PIX</button>
     </div>
   </div>
+
+  <div *ngIf="paymentSuccess" class="success-message">
+    <h3>Pagamento aprovado!</h3>
+    <p>Obrigado por sua compra.</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <button class="close-button" (click)="closeModal()">Fechar</button>
+</div>

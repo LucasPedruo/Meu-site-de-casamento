@@ -20,7 +20,7 @@ export class BuyItemModalComponent implements OnInit {
   errorMessage: string = '';
   paymentId: string = '';
   paymentSuccess: boolean = false;
-  pixcec: string = '';
+  pixCode: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<BuyItemModalComponent>,
@@ -32,59 +32,66 @@ export class BuyItemModalComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.userName && this.userEmail) {
-      this.paymentDataSubmitted = true;
-      this.sendPaymentDataToAPI();
-    } else {
+    if (!this.userName || !this.userEmail) {
       alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    this.paymentDataSubmitted = true;
+    this.sendPaymentDataToAPI();
+  }
+
+  private async sendPaymentDataToAPI() {
+    try {
+      const params = new URLSearchParams({
+        nome: this.userName,
+        email: this.userEmail,
+        preco: this.item?.price.toString(),
+        item: this.item?.title
+      });
+
+      const response = await fetch(`https://frangonacaixaoficial.online/pagamentoLucas?${params}`);
+      
+      if (!response.ok) {
+        throw new Error('Erro ao processar pagamento');
+      }
+
+      const data = await response.json();
+      debugger
+      this.paymentUrl = data.checkout_init_point;
+      this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
+      this.paymentId = data.full_info_for_developer.pix.id;
+      this.pixCode = data.pix_qr_code;
+      
+      this.startPaymentStatusCheck();
+    } catch (error) {
+      console.error('Erro ao enviar dados de pagamento:', error);
+      this.errorMessage = 'Houve um erro ao processar seu pagamento. Tente novamente mais tarde.';
+      this.paymentDataSubmitted = false;
     }
   }
 
-  sendPaymentDataToAPI() {
-    var params = `nome=${this.userName}`;
-    params += `&email=${this.userEmail}`;
-    params += `&preco=${this.item?.price}`;
-    params += `&item=${this.item?.title}`;
+  private startPaymentStatusCheck() {
+    const checkPaymentStatus = setInterval(async () => {
+      try {
+        const response = await fetch(`https://frangonacaixaoficial.online/notificacaoLucas?id=${this.paymentId}`);
+        const data = await response.json();
 
-    fetch(`https://frangonacaixaoficial.online/pagamentoLucas?${params}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erro ao processar pagamento');
+        if (data.status === 'approved') {
+          clearInterval(checkPaymentStatus);
+          this.paymentSuccess = true;
+        } else if (data.status === 'rejected') {
+          clearInterval(checkPaymentStatus);
+          alert('Pagamento rejeitado. Tente novamente.');
+          this.paymentDataSubmitted = false;
         }
-        return response.json();
-      })
-      .then((data) => {
-        this.paymentUrl = data.checkout_init_point;
-        this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
-        this.paymentId = data.full_info_for_developer.pix.id;
-        this.pixcec = data.pix_qr_code;
-        this.startPaymentStatusCheck();
-      })
-      .catch((error) => {
-        console.error('Erro ao enviar dados de pagamento', error);
-        this.errorMessage = 'Houve um erro ao processar seu pagamento. Tente novamente mais tarde.';
-        this.paymentDataSubmitted = false;
-      });
-  }
-
-  startPaymentStatusCheck() {
-    const checkPaymentStatus = setInterval(() => {
-      fetch(`https://frangonacaixaoficial.online/notificacaoLucas?id=${this.paymentId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === 'approved') {
-            clearInterval(checkPaymentStatus);
-            this.paymentSuccess = true;
-          } else if (data.status === 'rejected') {
-            clearInterval(checkPaymentStatus);
-            alert('Pagamento rejeitado. Tente novamente.');
-            this.paymentDataSubmitted = false;
-          }
-        })
-        .catch((error) => {
-          console.error('Erro ao verificar status do pagamento', error);
-        });
+      } catch (error) {
+        console.error('Erro ao verificar status do pagamento:', error);
+      }
     }, 2000);
+
+    // Limpar o intervalo após 5 minutos para evitar chamadas infinitas
+    setTimeout(() => clearInterval(checkPaymentStatus), 300000);
   }
 
   redirectToPayment(): void {
@@ -95,26 +102,15 @@ export class BuyItemModalComponent implements OnInit {
     }
   }
 
-  redirectToSandbox(): void {
-    if (this.paymentUrl) {
-      const sandboxUrl = this.paymentUrl.replace(
-        'https://www.mercadopago.com.br',
-        'https://sandbox.mercadopago.com.br'
-      );
-      window.location.href = sandboxUrl;
-    } else {
-      console.error('URL de pagamento não encontrada');
+  copyPixCode(): void {
+    if (this.pixCode) {
+      navigator.clipboard.writeText(this.pixCode)
+        .then(() => alert('Código PIX copiado para a área de transferência'))
+        .catch(err => {
+          console.error('Erro ao copiar código:', err);
+          alert('Erro ao copiar código. Por favor, tente copiar manualmente.');
+        });
     }
-  }
-
-  copyQRCode(): void {
-    const copyText = document.createElement('input');
-    copyText.value = this.pixUrl;
-    document.body.appendChild(copyText);
-    copyText.select();
-    document.execCommand('copy');
-    document.body.removeChild(copyText);
-    alert('QR Code copiado para a área de transferência');
   }
 
   closeModal(): void {
