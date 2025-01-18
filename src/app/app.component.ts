@@ -28,4 +28,10 @@ export class AppComponent {
       data: { item },
     });
   }
+
+  showMenu : boolean = false;
+  toggleMenu(){
+    this.showMenu =!this.showMenu;
+  }
+
 }

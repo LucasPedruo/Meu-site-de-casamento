@@ -12,7 +12,7 @@ import { BuyItemModalComponent } from '../buy-item-modal/buy-item-modal.componen
   styleUrls: ['./lista-de-presentes.component.scss'],
 })
 export class ListaDePresentesComponent {
-  constructor(private router: Router, private dialog: MatDialog) {} // Injeta MatDialog
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   popupVisible = false;
 

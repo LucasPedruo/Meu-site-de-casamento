@@ -44,3 +44,37 @@ header {
         flex-direction: column;
     }
 }
+
+@media screen and (max-width: 768px) {
+    header {
+        height: 400px;
+        padding-right: 20px;
+        padding-left: 20px;
+       
+    
+        .diasfaltantes {
+         display: none;
+        }
+    
+        h1 {
+            font-size: 38px;
+            letter-spacing: 0;
+        }
+
+        p{
+            width: auto !important;
+        }
+    }
+    
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px;
+        background-color: red!important;
+    
+        .content{
+            background-color: red;
+        }
+    }
+}

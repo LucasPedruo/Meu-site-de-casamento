@@ -9,10 +9,32 @@
         <li><a routerLink="/inicio" routerLinkActive="active">Início</a></li>
         <li><a routerLink="/lista-de-presente" routerLinkActive="active">Lista de presentes</a></li>
         <li><a routerLink="/cerimonia-e-festa" routerLinkActive="active">Cerimônia e festa</a></li>
-        <!-- <li><a routerLink="/confirmacao-de-presenca" routerLinkActive="active">Confirme sua presença</a></li> -->
         <li><a routerLink="/sugestao-de-traje" routerLinkActive="active">Sugestão de traje</a></li>
       </ul>
     </section>
+    
+    <section class="menu-mobile"> 
+      <span class="material-icons" [ngClass]="" (click)="toggleMenu()">
+        @if(!showMenu){
+          menu
+        }
+        @if(showMenu){
+          close
+        }
+      </span>
+    </section>
+ 
+    @if(showMenu){
+      <div class="menu-flutuante">
+        <ul>
+          <li><a routerLink="/inicio" routerLinkActive="active">Início</a></li>
+          <li><a routerLink="/lista-de-presente" routerLinkActive="active">Lista de presentes</a></li>
+          <li><a routerLink="/cerimonia-e-festa" routerLinkActive="active">Cerimônia e festa</a></li>
+          <li><a routerLink="/sugestao-de-traje" routerLinkActive="active">Sugestão de traje</a></li>
+        </ul>
+      </div>
+    }
+      
   </section>
 </nav>
 

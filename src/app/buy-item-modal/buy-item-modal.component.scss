@@ -1,0 +1,145 @@
+.modal-content {
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .form-container {
+    text-align: left;
+  }
+
+  .form-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .submit-button[disabled] {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+
+  .pix-container,
+  .mercadopago-container {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .pix-container img {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .loading-container {
+    margin-top: 15px;
+    color: #1976d2;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .cancel-button {
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .alternate-payment-button {
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 50px;
+  }
+
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-icon {
+    font-size: 80px;
+    color: #4caf50;
+    margin-bottom: 10px;
+  }
+
+  .copy-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .copy-input {
+    width: 80%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  .copy-button {
+    background-color: #1976d2;
+    color: #fff;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 100px;
+  }

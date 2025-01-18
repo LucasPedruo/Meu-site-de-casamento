@@ -9,6 +9,10 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/ro
 })
 export class HomeComponent {
 
+    constructor(
+        private router: Router
+    ){}
+
  dataAlvo = new Date(2025, 4, 16); 
 
  formatarDataParaBrasileiro(data: Date): string {
@@ -27,5 +31,12 @@ calcularDiasRestantes(dataFutura: Date): number {
 dataFormatada = this.formatarDataParaBrasileiro(this.dataAlvo);
 diasRestantes = this.calcularDiasRestantes(this.dataAlvo);
 
+irParaListaDePresentes(){
+    this.router.navigate(['/lista-de-presente']);
+}
+
+irParaDressCode(){
+    this.router.navigate(['/sugestao-de-traje']);
+}
 
 }

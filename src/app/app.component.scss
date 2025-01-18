@@ -1,3 +1,5 @@
+@import  'material-icons/iconfont/material-icons.css' ;
+
 nav {
     display: flex;
     justify-content: center;
@@ -55,6 +57,11 @@ nav {
                 }
             }
         }
+
+        .menu-mobile{
+            display: none;
+        }
+
     }
 }
 
@@ -66,6 +73,11 @@ nav {
             background-color: white!important;
             color: black!important;
         }
+    }
+
+    .menu-mobile{
+        background-color: white;
+        color: black;
     }
 }
 
@@ -85,5 +97,62 @@ footer {
 
     p {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    nav{
+        padding-right: 20px;
+
+        .right{
+            display: none;
+        }
+    
+        .menu-mobile{
+            display: flex !important;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: black;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            
+        }
+
+        .menu-flutuante{
+            position: fixed;
+            top: 70px;
+            border-radius: 4px;
+            background-color: rgb(241, 241, 241);
+            border: solid 1px rgb(186, 186, 186);
+            padding: 10px;
+            right: 20px;
+            ul{
+                li{
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    
+                    a{
+                        text-decoration: none;
+                        height: 40px;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        color: rgb(34, 34, 34);
+                        font-size: 14px;
+                        padding: 0 20px;
+                        border-radius: 4px;
+                        transition: .5s ease-in-out;
+
+                        &:hover{
+                            background-color: rgb(214, 214, 214);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,1 +1,76 @@
-<p>buy-item-modal works!</p>
+<div class="modal-content">
+    <div *ngIf="paymentSuccess">
+      <div class="success-content">
+        <i class="material-icons success-icon">check_circle</i>
+        <h2>Pagamento Realizado com Sucesso!</h2>
+        <p>Obrigado por sua compra! Seu pedido foi confirmado.</p>
+      </div>
+    </div>
+
+    <div *ngIf="!paymentSuccess">
+      <h2 class="modal-title">Confirmar Compra</h2>
+      
+      <div *ngIf="!paymentDataSubmitted" class="form-container">
+        <h3 class="form-title">Informe seus dados para continuar</h3>
+        <form (ngSubmit)="onSubmit()" #paymentForm="ngForm" class="payment-form">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" [(ngModel)]="userName" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="userEmail" required />
+          </div>
+          <button type="submit" mat-button [disabled]="!paymentForm.valid" class="submit-button">
+            Enviar
+          </button>
+        </form>
+      </div>
+
+      <!-- Tela de carregamento enquanto o PIX não é gerado -->
+      <div *ngIf="paymentDataSubmitted && !pixUrl" class="loading-container">
+        <p>Gerando QR Code do pagamento...</p>
+      </div>
+
+      <!-- Quando o PIX QR code estiver disponível -->
+      <div *ngIf="paymentDataSubmitted && pixUrl" class="pix-container">
+        <h3>Pagamento via PIX</h3>
+        <p>Use o QR code abaixo para pagar:</p>
+        <img [src]="pixUrl" alt="QR Code Pix" width="200" />
+        <div class="copy-container">
+          <input 
+            type="text" 
+            readonly 
+            [value]="pixcec" 
+            class="copy-input"
+          />
+          <button mat-button (click)="copyQRCode()" class="copy-button">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="paymentDataSubmitted && !pixUrl" class="mercadopago-container">
+        <h3>Pagamento via Mercado Pago</h3>
+      </div>
+    </div>
+
+    <div class="actions" *ngIf="!paymentSuccess">
+      <button 
+        mat-button 
+        *ngIf="!paymentDataSubmitted" 
+        (click)="closeModal()" 
+        class="cancel-button"
+      >
+        Cancelar
+      </button>
+      <button 
+        mat-button 
+        *ngIf="pixUrl" 
+        (click)="redirectToSandbox()" 
+        class="alternate-payment-button"
+      >
+        Pagar de outra forma
+      </button>
+    </div>
+  </div>
