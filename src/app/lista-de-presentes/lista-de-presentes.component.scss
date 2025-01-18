@@ -189,8 +189,11 @@ main {
             .buttons{
                justify-content: space-between;
                button{
-                   padding: 10px 19px; 
+                   padding: 10px 12px; 
                     margin: 0;
+                    p{
+                        color: black;
+                    }
                 }
                 span{
                     display: none;
