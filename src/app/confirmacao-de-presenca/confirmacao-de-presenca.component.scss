@@ -110,8 +110,8 @@ main {
         .img {
             width: 100px;
             height: 100px;
-            background-color: red;
             background-image: url(../../assets/images/logo-preta.png);
+            filter: invert(1);
         }
 
     }
