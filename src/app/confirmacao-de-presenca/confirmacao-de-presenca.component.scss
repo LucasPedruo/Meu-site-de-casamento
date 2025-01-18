@@ -49,10 +49,15 @@ main {
 
     .content {
         padding-top: 40px;
-        min-height: 100vh;
+        display: flex;
+        min-height: 50vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         max-width: 1200px;
         width: 100%;
         text-align: center;
+        gap: 20px;
 
         .buttons {
             display: flex;
@@ -102,54 +107,13 @@ main {
             }
         }
 
-        .items {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            justify-items: center;
-            width: 100%;
+        .img {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            background-image: url(../../assets/images/logo-preta.png);
         }
 
-        .item {
-            display: flex;
-            flex-direction: column;
-            //align-items: center;
-            //text-align: center;
-            gap: 5px;
-            justify-content: space-between;
-            height: 100%;
-
-            .info {
-                padding: 10px 0;
-                text-align: left;
-            }
-
-            .item-image {
-                width: 300px;
-                height: 300px;
-                object-fit: cover;
-                //border-radius: 8px;
-                border: solid 1px rgb(204, 204, 204);
-                margin-bottom: 10px;
-            }
-
-            button {
-                width: 100%;
-                padding: 15px;
-                background-color: black;
-                color: white;
-                border: none;
-                margin-bottom: 40px;
-
-                &:hover {
-                    background-color: rgb(55, 55, 55);
-                    color: white;
-                    transition: 0.5s;
-                    cursor: pointer;
-                }
-            }
-        }
     }
 }
 
@@ -196,12 +160,7 @@ main {
                 display: none;
             }
 
-            .img {
-                width: 100px;
-                height: 100px;
-                background-color: red;
-                background-image: url(../../assets/images/logo-preta.png);
-            }
+
         }
     }
 }
