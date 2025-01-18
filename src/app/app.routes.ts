@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'cerimonia-e-festa', component: CerimoniaEFestaComponent },
   { path: 'confirmacao-de-presenca', component: ConfirmacaoDePresencaComponent },
   { path: 'sugestao-de-traje', component: SugestaoDeTrajeComponent },
+  { path: 'confirmacao-de-presenca', component: ConfirmacaoDePresencaComponent },
 ];
 
 @NgModule({
