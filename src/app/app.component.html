@@ -28,11 +28,11 @@
     @if(showMenu){
       <div class="menu-flutuante">
         <ul>
-          <li><a routerLink="/inicio" routerLinkActive="active">Início</a></li>
-          <li><a routerLink="/lista-de-presente" routerLinkActive="active">Lista de presentes</a></li>
-          <li><a routerLink="/cerimonia-e-festa" routerLinkActive="active">Cerimônia e festa</a></li>
-          <li><a routerLink="/sugestao-de-traje" routerLinkActive="active">Sugestão de traje</a></li>
-          <li><a routerLink="/confirmacao-de-presenca" routerLinkActive="active">Confirmação de presença</a></li>
+          <li><a routerLink="/inicio" (click)="toggleMenu()" routerLinkActive="active">Início</a></li>
+          <li><a routerLink="/lista-de-presente" (click)="toggleMenu()" routerLinkActive="active">Lista de presentes</a></li>
+          <li><a routerLink="/cerimonia-e-festa" (click)="toggleMenu()" routerLinkActive="active">Cerimônia e festa</a></li>
+          <li><a routerLink="/sugestao-de-traje" (click)="toggleMenu()" routerLinkActive="active">Sugestão de traje</a></li>
+          <li><a routerLink="/confirmacao-de-presenca" (click)="toggleMenu()" routerLinkActive="active">Confirmação de presença</a></li>
         </ul>
       </div>
     }
@@ -43,5 +43,5 @@
 <router-outlet></router-outlet>
 
 <footer>
-  <p>Com muito amor Larissa & Lucas</p>
+  <p>Com muito amor Larissa & Lucas ❤️</p>
 </footer>

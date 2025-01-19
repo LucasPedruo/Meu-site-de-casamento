@@ -64,6 +64,14 @@ main {
     gap: 40px;
     padding: 40px;
 
+    .container-duplo-first{
+        display: flex;
+        max-width: 1200px;
+        flex-direction: column;
+        width: 100%;
+        gap: 40px;
+    }
+
     .container-evento {
         border: solid 1px rgb(223, 222, 222);
         padding: 30px;
@@ -99,6 +107,7 @@ main {
                     padding: 0;
                     height: fit-content;
                     font-size: 14px;
+                    text-align: left;
 
                 }
 
@@ -183,6 +192,17 @@ main {
             gap: 20px;
             height: 300px;
             justify-content: space-between;
+
+            .textos{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .texto-presentes {
+                font-size: 14px;
+                color: white;
+            }
 
             .conteudo {
                 display: flex;

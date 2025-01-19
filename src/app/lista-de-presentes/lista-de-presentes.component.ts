@@ -12,11 +12,12 @@ import { BuyItemModalComponent } from '../buy-item-modal/buy-item-modal.componen
   styleUrls: ['./lista-de-presentes.component.scss'],
 })
 export class ListaDePresentesComponent {
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(private router: Router, private dialog: MatDialog) { }
 
   popupVisible = false;
 
- items = [
+  items = [
+    { id: 0, title: 'TESTE', category: 'casa', price: 0.01, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'disponivel' },
     { id: 1, title: 'Sofá', category: 'casa', price: 1500, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'disponivel' },
     { id: 2, title: 'Viagem para Paris', category: 'lua_de_mel', price: 10000, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'disponivel' },
     { id: 3, title: 'Jogo de Panelas', category: 'casa', price: 500, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'disponivel' },
@@ -48,9 +49,9 @@ export class ListaDePresentesComponent {
     { id: 29, title: 'Suporte para TV', category: 'casa', price: 150, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'disponivel' },
     { id: 30, title: 'Climatizador de Ar', category: 'tecnologia', price: 800, image: 'https://ellycandido.com.br/wp-content/uploads/2024/08/Como-funciona-um-casamento-na-praia-1024x683.jpg', status: 'indisponivel' }
   ];
-  
-  
-  
+
+
+
 
   buttonActive: string = 'all';
 
@@ -72,5 +73,5 @@ export class ListaDePresentesComponent {
       data: { item },
     });
   }
-  
+
 }

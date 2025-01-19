@@ -1,9 +1,9 @@
 <header>
     <div class="box-content">
         <h1>Lista de presentes</h1>
-        <p>
-            "Deus uniu nossos caminhos e nós, sob sua benção, uniremos nossas vidas para sempre."
-        </p>
+<!--         <p>
+            "Isso vem do Senhor e é algo maravilhoso para nós. <br> Salmos 118:23"
+        </p> -->
     </div>
 </header>
 
@@ -18,17 +18,17 @@
             <button (click)="filterItems('casa')"
                 [ngClass]="{'dark': buttonActive === 'casa', 'transparente': buttonActive !== 'casa'}">
                 <span class="material-icons">home</span>
-                Casa
+                <p>Casa</p>
             </button>
             <button (click)="filterItems('lua_de_mel')"
                 [ngClass]="{'dark': buttonActive === 'lua_de_mel', 'transparente': buttonActive !== 'lua_de_mel'}">
                 <span class="material-icons">location_on</span>
-                Lua de Mel
+                <p>Lua de Mel</p>
             </button>
             <button (click)="filterItems('criativos')"
                 [ngClass]="{'dark': buttonActive === 'criativos', 'transparente': buttonActive !== 'criativos'}">
                 <span class="material-icons">lightbulb</span>
-                Criativos
+                <p>Criativos</p>
             </button>
         </div>
 
