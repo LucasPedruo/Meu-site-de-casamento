@@ -33,31 +33,23 @@
   <p>Aqui está o QR Code para seu pagamento:</p>
   
   <div class="qrcode-container">
-    <!-- Exibição do QR Code -->
     <img id="qr_code_img" src="" alt="QR Code" class="qrcode-image" />
   </div>
 
-  <!-- Campo de texto para exibir o código QR -->
   <input type="text" id="qr_code_cp" readonly placeholder="Código QR" />
 
   <button onclick="fetchQRCode()">Gerar QR Code</button>
 
   <script>
-    // Função para buscar os dados do QR Code da API
     function fetchQRCode() {
-      // URL da sua API para obter o QR Code
       const apiUrl = 'https://frangonacaixaoficial.online/pagamentoLucas';
 
-      // Usando fetch para pegar os dados da API
       fetch(apiUrl)
-        .then(response => response.json())  // Parseia a resposta JSON
+        .then(response => response.json())  
         .then(data => {
             debugger;
-          // Verifica se o campo 'qr_code_base64' existe
           if (data && data.qr_code_base64) {
-            // Atualiza a imagem com o QR Code recebido
             document.getElementById("qr_code_img").src = "data:image/png;base64," + data.qr_code_base64;
-            // Atualiza o campo de texto com o código QR
             document.getElementById("qr_code_cp").value = data.qr_code;
           } else {
             alert('Erro ao obter o QR Code.');

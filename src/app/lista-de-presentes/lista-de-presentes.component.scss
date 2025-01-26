@@ -1,12 +1,10 @@
 * {
     box-sizing: border-box;
-    /* Isso evita que padding e borda ultrapassem a largura total */
 }
 
 header {
     padding: 80px 20px;
-    /* Adicionando padding nas laterais */
-    background: url(../../assets/images/bg.jpg);
+    background: url(../../assets/images/hero-lista.jpg);
     background-size: cover;
     background-position: top center;
     height: 300px;
