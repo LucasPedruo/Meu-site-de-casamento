@@ -1,5 +1,5 @@
 <div class="modal-container">
-  <h2>Comprar {{ item?.title }}</h2>
+  <h2>{{ item?.title }}</h2>
   
   <div *ngIf="!paymentDataSubmitted" class="form-container">
     <div class="form-group">
@@ -53,5 +53,4 @@
     {{ errorMessage }}
   </div>
 
-  <button class="close-button" (click)="closeModal()">Fechar</button>
 </div>
