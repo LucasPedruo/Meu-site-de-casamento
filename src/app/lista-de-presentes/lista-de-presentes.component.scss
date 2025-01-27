@@ -100,8 +100,9 @@ main {
             justify-items: center;
             width: 100%;
         }
-
+        
         .item {
+            min-width: 285px;
             display: flex;
             flex-direction: column;
             //align-items: center;
