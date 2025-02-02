@@ -47,7 +47,7 @@ export class ListaDePresentesComponent {
     { id: 28, title: 'Organizador de gaveta', category: 'casa', price: 250, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOk6Qe118g8jQPQINHRreltwXGOMHGDxKdtNVe7lXETWyPHwGbYDIuAdZPlcBRwiv_Wtk&usqp=CAU', status: 'disponivel' },
     { id: 29, title: 'Rolo de massa', category: 'casa', price: 30, image: 'https://http2.mlstatic.com/D_NQ_NP_738423-MLU72754255044_112023-O.webp', status: 'disponivel' },
     { id: 30, title: 'Espremedor', category: 'casa', price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNCriw9p5l9QJGCSf2XfoIBR8u4smHhlBjvg&s', status: 'disponivel' },
-    { id: 31, title: 'Taças', category: 'casa', price: 140, image: 'https://static.eleganzhome.com.br/public/vivaceoutlet/imagens/produtos/jogo-basico-18-tacas-quadradas-xtra-cristal-ecologico-bohemia-63bff0bcb212f.jpg', status: 'disponivel' },
+    { id: 31, title: 'Taças', category: 'casa', price: 140, image: 'https://a-static.mlcdn.com.br/800x560/jogo-de-tacas-para-vinho-e-agua-em-vidro-6-pecas-490ml-nadir-barone/magazineluiza/142245200/02089f9b7f598eb77c869c7c6ed99a5a.jpg', status: 'disponivel' },
     { id: 33, title: 'Formas de bolo', category: 'casa', price: 100, image: 'https://down-br.img.susercontent.com/file/br-11134207-7qukw-ljn51dvrl7om2a', status: 'disponivel' },
     { id: 34, title: 'Marmitex de vidro', category: 'casa', price: 300, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7gRtKOTS8r1VJsUBoYaICPiMiAs8CjSpQsg&s', status: 'disponivel' },
     { id: 35, title: 'Kit Pizza', category: 'casa', price: 50, image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591', status: 'disponivel' },
