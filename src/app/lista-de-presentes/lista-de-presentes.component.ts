@@ -19,6 +19,7 @@ export class ListaDePresentesComponent implements OnInit {
   currentPage = 0;
 
   items = [
+    { id: 0, title: 'teste', category: 'casa', price: 0.1, image: 'https://images.tcdn.com.br/img/img_prod/481109/estante_home_theater_para_tv_ate_70_polegadas_com_porta_correr_220_cm_guaruja_permobili_nature_grafi_123460817_1_9793237c98201a1523fea2a4043f14ef.jpg', status: 'disponivel' },
     { id: 1, title: 'Estante', category: 'casa', price: 900, image: 'https://images.tcdn.com.br/img/img_prod/481109/estante_home_theater_para_tv_ate_70_polegadas_com_porta_correr_220_cm_guaruja_permobili_nature_grafi_123460817_1_9793237c98201a1523fea2a4043f14ef.jpg', status: 'disponivel' },
     { id: 2, title: 'Televisão', category: 'casa', price: 2273, image: 'https://images.unsplash.com/photo-1593784991095-a205069470b6', status: 'disponivel' },
     { id: 3, title: 'Tapete', category: 'casa', price: 390, image: 'https://images.unsplash.com/photo-1575414003591-ece8d0416c7a', status: 'disponivel' },
@@ -102,8 +103,8 @@ export class ListaDePresentesComponent implements OnInit {
 
   openBuyItemModal(item: any) {
     this.dialog.open(BuyItemModalComponent, {
-      width: '1000px',
-      height: '500px',
+      width: 'fit-contetn',
+      height: 'fit-content',
       data: { item },
     });
   }

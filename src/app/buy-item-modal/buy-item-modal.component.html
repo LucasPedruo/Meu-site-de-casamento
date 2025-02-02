@@ -1,56 +1,99 @@
 <div class="modal-container">
-  <h2>{{ item?.title }}</h2>
-  
-  <div *ngIf="!paymentDataSubmitted" class="form-container">
-    <div class="form-group">
-      <label for="userName">Nome:</label>
-      <input 
-        id="userName"
-        type="text" 
-        [(ngModel)]="userName" 
-        placeholder="Seu nome completo"
-        required>
-    </div>
 
-    <div class="form-group">
-      <label for="userEmail">Email:</label>
-      <input 
-        id="userEmail"
-        type="email" 
-        [(ngModel)]="userEmail" 
-        placeholder="seu@email.com"
-        required>
-    </div>
-
-    <button (click)="onSubmit()" [disabled]="!userName || !userEmail">
-      Continuar para pagamento
-    </button>
-  </div>
-
-  <div *ngIf="paymentDataSubmitted && !paymentSuccess" class="payment-options">
-    <h3>Escolha sua forma de pagamento:</h3>
+  <span class="ambienteSeguro">
     
-    <div *ngIf="paymentUrl" class="payment-option">
-      <h4>Cartão de Crédito/Débito</h4>
-      <button (click)="redirectToPayment()">
-        Pagar com Mercado Pago
+    <div class="material-icons">
+      lock_open
+    </div>
+
+    <p>Ambiente 100% seguro</p>
+  </span>
+
+  @if(preencherDados == false){
+    <h2>Obaaa! Que legal que você escolheu {{ item?.title }} para nos presentear!</h2>
+  
+    <p>Nós implementamos 3 modelos de pagamento <br> via pix, cartão de débito e crédito.</p>
+  
+    <button (click)="preencherDadosOpen()">Continuar pagamento</button>
+  }
+
+  @if(preencherDados == true){
+    
+    <div *ngIf="!paymentDataSubmitted" class="form-container">
+
+      <h2>Preencha seu nome e seu email corretamente!</h2>
+
+      <div class="form-group">
+        <label for="userName">Nome:</label>
+        <input 
+          id="userName"
+          type="text" 
+          [(ngModel)]="userName" 
+          placeholder="Seu nome completo"
+          required>
+      </div>
+  
+      <div class="form-group">
+        <label for="userEmail">Email:</label>
+        <input 
+          id="userEmail"
+          type="email" 
+          [(ngModel)]="userEmail" 
+          #emailInput="ngModel"
+          placeholder="seu@email.com"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          required>
+      
+        <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+          Email inválido!
+        </div>
+      </div>
+      
+  
+      <button (click)="onSubmit()" [disabled]="!userName || !userEmail">
+        Selecionar forma de pagamento
       </button>
     </div>
+  
+    <div *ngIf="paymentDataSubmitted && !paymentSuccess" class="payment-options">
+      
+      @if(pix == false){
+        <h3>Escolha sua forma de pagamento:</h3>
+      }
+      
+      <div *ngIf="pixUrl" class="payment-option">
+    
+        @if(pix == false){
+          <button (click)="gerarPix()">PIX</button>
+        }
 
-    <div *ngIf="pixUrl" class="payment-option">
-      <h4>PIX</h4>
-      <img [src]="pixUrl" alt="QR Code PIX" class="pix-qr-code">
-      <button (click)="copyPixCode()">Copiar Código PIX</button>
+        @if(pix == true){
+          <img [src]="pixUrl" alt="QR Code PIX" class="pix-qr-code">
+          <button (click)="copyPixCode()">Copiar Código PIX</button>
+        }
+
+      </div>
+
+      @if(pix == false || credito == true){
+        <div *ngIf="paymentUrl" class="payment-option">
+          <button (click)="redirectToPayment()">
+            Cartão de Crédito/Débito
+          </button>
+        </div>
+      }
+
+  
     </div>
-  </div>
-
-  <div *ngIf="paymentSuccess" class="success-message">
-    <h3>Pagamento aprovado!</h3>
-    <p>Obrigado por sua compra.</p>
-  </div>
-
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
+  
+    <div *ngIf="paymentSuccess" class="success-message">
+      <h3>{{userName}} Seu pagamento foi aprovado!</h3>
+      <p>Obrigado por participar da nossa história ❤ .</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+  
 
 </div>

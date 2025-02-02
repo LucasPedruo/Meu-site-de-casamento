@@ -1,14 +1,54 @@
 .modal-container {
-  padding: 20px;
-  max-width: 500px;
+  padding: 40px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+  user-select: none;
 
-  h2 {
-    text-align: center;
+  .ambienteSeguro{
+    background-color: rgb(238, 238, 238);
+    border: solid 1px black;
+    color: black;
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 3px 10px;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
     margin-bottom: 20px;
+
+    .material-icons{
+      font-size: 12px;
+    }
+  }
+
+  button{
+    margin-top: 60px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    transition: .5s ease-in-out;
+
+    &:hover{
+      background-color: white;
+      color: black;
+      border: solid 1px black;
+    }
+  }
+
+  strong{
+    font-weight: 900;
+  }
+
+  h2, p {
+    text-align: center;
   }
 }
 
@@ -23,6 +63,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
 
   label {
     font-weight: 500;
@@ -45,6 +86,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  button{
+    margin: 0;
+  }
 
   h3 {
     text-align: center;

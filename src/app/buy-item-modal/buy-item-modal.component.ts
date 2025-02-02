@@ -21,6 +21,17 @@ export class BuyItemModalComponent implements OnInit {
   paymentId: string = '';
   paymentSuccess: boolean = false;
   pixCode: string = '';
+  preencherDados: boolean = false
+  pix: boolean = false;
+  credito: boolean = false
+
+  gerarPix(){
+    this.pix = true;
+  }
+
+  preencherDadosOpen(){
+    this.preencherDados = true
+  }
 
   constructor(
     public dialogRef: MatDialogRef<BuyItemModalComponent>,
