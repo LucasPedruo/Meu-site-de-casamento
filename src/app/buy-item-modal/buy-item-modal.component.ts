@@ -57,7 +57,6 @@ export class BuyItemModalComponent implements OnInit {
       }
 
       const data = await response.json();
-      debugger
       this.paymentUrl = data.checkout_init_point;
       this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
       this.paymentId = data.full_info_for_developer.pix.id;

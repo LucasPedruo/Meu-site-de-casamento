@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog'; // Importa MatDialog
 import { BuyItemModalComponent } from '../buy-item-modal/buy-item-modal.component'; // Importa a modal
@@ -11,10 +11,12 @@ import { BuyItemModalComponent } from '../buy-item-modal/buy-item-modal.componen
   templateUrl: './lista-de-presentes.component.html',
   styleUrls: ['./lista-de-presentes.component.scss'],
 })
-export class ListaDePresentesComponent {
+export class ListaDePresentesComponent implements OnInit {
   constructor(private router: Router, private dialog: MatDialog) { }
 
   popupVisible = false;
+  itemsPerPage = 12;
+  currentPage = 0;
 
   items = [
     { id: 1, title: 'Estante', category: 'casa', price: 900, image: 'https://images.tcdn.com.br/img/img_prod/481109/estante_home_theater_para_tv_ate_70_polegadas_com_porta_correr_220_cm_guaruja_permobili_nature_grafi_123460817_1_9793237c98201a1523fea2a4043f14ef.jpg', status: 'disponivel' },
@@ -89,18 +91,14 @@ export class ListaDePresentesComponent {
     { id: 71, title: 'Pix de 1000', category: 'criativos', price: 1000, image: 'https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4', status: 'disponivel' },
   ];
 
+  async ngOnInit() {
+      const itensPre: any = []
+      await this.items
+    }
+
   buttonActive: string = 'all';
 
   filteredItems: any[] = this.items;
-
-  filterItems(category: string) {
-    this.buttonActive = category;
-    if (category === 'all') {
-      this.filteredItems = this.items;
-    } else {
-      this.filteredItems = this.items.filter((item) => item.category === category);
-    }
-  }
 
   openBuyItemModal(item: any) {
     this.dialog.open(BuyItemModalComponent, {
@@ -108,6 +106,37 @@ export class ListaDePresentesComponent {
       height: '500px',
       data: { item },
     });
+  }
+
+  get paginatedItems() {
+    const start = this.currentPage * this.itemsPerPage;
+    return this.filteredItems.slice(start, start + this.itemsPerPage);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+  }
+
+  filterItems(category: string) {
+    this.buttonActive = category;
+    this.currentPage = 0; // Reset to first page when filtering
+    if (category === 'all') {
+      this.filteredItems = this.items;
+    } else {
+      this.filteredItems = this.items.filter((item) => item.category === category);
+    }
   }
 
 }

@@ -1,7 +1,6 @@
 <header>
     <div class="box-content">
         <h1>Lista de presentes</h1>
-
     </div>
 </header>
 
@@ -31,7 +30,7 @@
         </div>
 
         <div class="items">
-            <div *ngFor="let item of filteredItems" class="item">
+            <div *ngFor="let item of paginatedItems" class="item">
                 <img [src]="item.image" alt="{{item.title}}" class="item-image">
                 <div class="info">
                     <h3>{{item.title}}</h3>
@@ -39,6 +38,24 @@
                 </div>
                 <button (click)="openBuyItemModal(item)">COMPRAR</button>
             </div>
+        </div>
+
+        <div class="pagination" *ngIf="filteredItems.length > itemsPerPage">
+            <button 
+                (click)="previousPage()" 
+                [disabled]="currentPage === 0"
+                class="pagination-button">
+                <span class="material-icons">chevron_left</span>
+            </button>
+            <span class="page-info">
+                Página {{currentPage + 1}} de {{totalPages}}
+            </span>
+            <button 
+                (click)="nextPage()" 
+                [disabled]="currentPage === totalPages - 1"
+                class="pagination-button">
+                <span class="material-icons">chevron_right</span>
+            </button>
         </div>
     </section>
 </main>

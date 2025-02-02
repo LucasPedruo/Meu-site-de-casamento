@@ -47,7 +47,6 @@
       fetch(apiUrl)
         .then(response => response.json())  
         .then(data => {
-            debugger;
           if (data && data.qr_code_base64) {
             document.getElementById("qr_code_img").src = "data:image/png;base64," + data.qr_code_base64;
             document.getElementById("qr_code_cp").value = data.qr_code;
