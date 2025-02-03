@@ -57,7 +57,7 @@ main {
                 margin-right: 10px;
                 text-decoration: none;
                 font-size: 14px;
-                border: solid 1px rgb(55, 55, 55);
+                border: solid 1px black;
                 background-color: transparent;
                 display: flex;
                 align-items: center;
@@ -70,12 +70,12 @@ main {
                 }
 
                 &.transparente {
-                    color: rgb(55, 55, 55);
+                    color: black;
                     background-color: transparent;
                 }
 
                 &:hover {
-                    background-color: rgb(55, 55, 55);
+                    background-color: black;
                     color: white;
                     transition: 0.5s;
                     cursor: pointer;
@@ -147,7 +147,7 @@ main {
                 height: 200px;
                 object-fit: cover;
                 //border-radius: 8px;
-                border: solid 1px rgb(204, 204, 204);
+               // border: solid 1px black;
                 margin-bottom: 10px;
             }
 
@@ -160,7 +160,7 @@ main {
                 margin-bottom: 40px;
 
                 &:hover {
-                    background-color: rgb(55, 55, 55);
+                    background-color: black;
                     color: white;
                     transition: 0.5s;
                     cursor: pointer;
@@ -210,9 +210,7 @@ main {
                 flex-grow: 1;
                    //padding: 10px 12px; 
                     margin: 0;
-                    p{
-                        color: black;
-                    }
+
                 }
                 span{
                     display: none;
@@ -247,21 +245,17 @@ main {
                     height: 300px;
                     object-fit: cover;
                     //border-radius: 8px;
-                    border: solid 1px rgb(204, 204, 204);
+                   // border: solid 1px black;
                     margin-bottom: 10px;
                 }
     
                 button {
                     width: 100%;
                     padding: 15px;
-                    background-color: black;
-                    color: white;
                     border: none;
                     margin-bottom: 40px;
     
                     &:hover {
-                        background-color: rgb(55, 55, 55);
-                        color: white;
                         transition: 0.5s;
                         cursor: pointer;
                     }
