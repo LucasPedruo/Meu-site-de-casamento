@@ -57,37 +57,36 @@
       }
 
       @if(pix == true){
-      <img src="/pix-larissa.jpg" alt="QR Code" width="300">
+      <img src="/pix-larissa.jpg" alt="QR Code" width="100%">
       <button (click)="copyPixCode()">Copiar Código PIX</button>
       <button (click)="exibirChavePix()">Usar chave Pix</button>
 
       @if(chavePix){
       <div class="grid">
-        <p>Ou use <strong>a chave Pix</strong></p>
         <div>
           <div>
-            <span>Chave Pix</span>
+            <span>Chave Pix:</span>
             <span>
               <span>(21)&nbsp;96968-5868</span>
-              <span class="material-symbols-outlined" (click)="copyChave">
+              <!-- <span class="material-symbols-outlined" (click)="copyChave">
                 content_copy
-              </span>
+              </span> -->
             </span>
           </div>
           <div>
-            <span>Nome</span>
+            <span>Nome:</span>
             <span>Larissa da Rocha Teixeira</span>
           </div>
           <div>
-            <span>CPF</span>
+            <span>CPF:</span>
             <span>•••.109.233-••</span>
           </div>
           <div>
-            <span>Banco</span>
+            <span>Banco:</span>
             <span>260 - Nu Pagamentos S.A. - Instituição de Pagamento</span>
           </div>
           <div>
-            <span>Identificador</span>
+            <span>Identificador:</span>
             <span>CYKNQycruo</span>
           </div>
         </div>
