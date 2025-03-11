@@ -8,6 +8,7 @@
   height: 100%;
   gap: 20px;
   user-select: none;
+  width: 100%;
 
   .ambienteSeguro{
     background-color: rgb(238, 238, 238);
@@ -86,6 +87,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 
   button{
     margin: 0;
@@ -94,6 +96,15 @@
   h3 {
     text-align: center;
     margin-bottom: 15px;
+  }
+
+  .grid{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .content{}
+
   }
 }
 

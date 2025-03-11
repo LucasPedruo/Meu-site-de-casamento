@@ -121,6 +121,8 @@ export class BuyItemModalComponent implements OnInit {
       });
   }
 
+  chavePix : boolean = false
+
   copyChave(): void {
     navigator.clipboard.writeText('21969685868')
       .then(() => alert('Chave PIX copiado para a área de transferência'))
@@ -128,6 +130,10 @@ export class BuyItemModalComponent implements OnInit {
         console.error('Erro ao copiar a chave:', err);
         alert('Erro ao copiar a chave. Por favor, tente copiar manualmente.');
       });
+  }
+
+  exibirChavePix(){
+    this.chavePix = !this.chavePix
   }
 
   closeModal(): void {

@@ -1,7 +1,7 @@
 <div class="modal-container">
 
   <span class="ambienteSeguro">
-    
+
     <div class="material-icons">
       lock_open
     </div>
@@ -10,101 +10,94 @@
   </span>
 
   @if(preencherDados == false){
-    <h2>Obaaa! Que legal que você escolheu {{ item?.title }} para nos presentear!</h2>
-  
-    <!-- <p>Nós implementamos 3 modelos de pagamento <br> via pix, cartão de débito e crédito.</p> -->
-  
-    <button (click)="preencherDadosOpen()">Continuar pagamento</button>
+  <h2>Obaaa! Que legal que você escolheu {{ item?.title }} para nos presentear!</h2>
+
+  <!-- <p>Nós implementamos 3 modelos de pagamento <br> via pix, cartão de débito e crédito.</p> -->
+
+  <button (click)="preencherDadosOpen()">Continuar pagamento</button>
   }
 
   @if(preencherDados == true){
-    
-    <div *ngIf="!paymentDataSubmitted" class="form-container">
 
-      <h2>Preencha seu nome e seu email corretamente!</h2>
+  <div *ngIf="!paymentDataSubmitted" class="form-container">
 
-      <div class="form-group">
-        <label for="userName">Nome:</label>
-        <input 
-          id="userName"
-          type="text" 
-          [(ngModel)]="userName" 
-          placeholder="Seu nome completo"
-          required>
-      </div>
-  
-      <div class="form-group">
-        <label for="userEmail">Email:</label>
-        <input 
-          id="userEmail"
-          type="email" 
-          [(ngModel)]="userEmail" 
-          #emailInput="ngModel"
-          placeholder="seu@email.com"
-          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          required>
-      
-        <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
-          Email inválido!
-        </div>
-      </div>
-      
-  
-      <button (click)="onSubmit()" [disabled]="!userName || !userEmail">
-        Selecionar forma de pagamento
-      </button>
+    <h2>Preencha seu nome e seu email corretamente!</h2>
+
+    <div class="form-group">
+      <label for="userName">Nome:</label>
+      <input id="userName" type="text" [(ngModel)]="userName" placeholder="Seu nome completo" required>
     </div>
-  
-    <div *ngIf="paymentDataSubmitted && !paymentSuccess" class="payment-options">
-      
-      @if(pix == false){
-        <h3>Escolha sua forma de pagamento:</h3>
-      }
-      
-      <div *ngIf="pixUrl" class="payment-option">
-    
-        @if(pix == false){
-          <button (click)="gerarPix()">PIX</button>
-        }
 
-        @if(pix == true){
-          <img src="/pix-larissa.jpg" alt="QR Code" width="300">
-          <button (click)="copyPixCode()">Copiar Código PIX</button>
+    <div class="form-group">
+      <label for="userEmail">Email:</label>
+      <input id="userEmail" type="email" [(ngModel)]="userEmail" #emailInput="ngModel" placeholder="seu@email.com"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
 
-          <hr>
-
-          <div>
-            <p>Ou use <strong>a chave Pix</strong></p>
-            <div>
-               <div>
-                   <span>Chave Pix</span>
-                   <span>
-                        <span  style="overflow: hidden; text-overflow: ellipsis;">(21)&nbsp;96968-5868</span>
-                   </span>
-               </div>
-                <div>
-                    <span>Nome</span>
-                    <span>Larissa da Rocha Teixeira</span>
-                </div>
-                <div>
-                    <span>CPF</span>
-                    <span>•••.109.233-••</span>
-                </div>
-                <div>
-                    <span>Banco</span>
-                    <span>260 - Nu Pagamentos S.A. - Instituição de Pagamento</span>
-                </div>
-                <div>
-                    <span>Identificador</span>
-                    <span>CYKNQycruo</span>
-                </div>
-            </div>
-        </div>
-        }
-
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+        Email inválido!
       </div>
+    </div>
 
-<!--       @if(pix == false || credito == true){
+
+    <button (click)="onSubmit()" [disabled]="!userName || !userEmail">
+      Selecionar forma de pagamento
+    </button>
+  </div>
+
+  <div *ngIf="paymentDataSubmitted && !paymentSuccess" class="payment-options">
+
+    @if(pix == false){
+    <h3>Escolha sua forma de pagamento:</h3>
+    }
+
+    <div *ngIf="pixUrl" class="payment-option">
+
+      @if(pix == false){
+      <button (click)="gerarPix()">PIX</button>
+      }
+
+      @if(pix == true){
+      <img src="/pix-larissa.jpg" alt="QR Code" width="300">
+      <button (click)="copyPixCode()">Copiar Código PIX</button>
+      <button (click)="exibirChavePix()">Usar chave Pix</button>
+
+      @if(chavePix){
+      <div class="grid">
+        <p>Ou use <strong>a chave Pix</strong></p>
+        <div>
+          <div>
+            <span>Chave Pix</span>
+            <span>
+              <span>(21)&nbsp;96968-5868</span>
+              <span class="material-symbols-outlined" (click)="copyChave">
+                content_copy
+              </span>
+            </span>
+          </div>
+          <div>
+            <span>Nome</span>
+            <span>Larissa da Rocha Teixeira</span>
+          </div>
+          <div>
+            <span>CPF</span>
+            <span>•••.109.233-••</span>
+          </div>
+          <div>
+            <span>Banco</span>
+            <span>260 - Nu Pagamentos S.A. - Instituição de Pagamento</span>
+          </div>
+          <div>
+            <span>Identificador</span>
+            <span>CYKNQycruo</span>
+          </div>
+        </div>
+      </div>
+      }
+      }
+
+    </div>
+
+    <!--       @if(pix == false || credito == true){
         <div *ngIf="paymentUrl" class="payment-option">
           <button (click)="redirectToPayment()">
             Cartão de Crédito/Débito
@@ -112,18 +105,18 @@
         </div>
       } -->
 
-  
-    </div>
-  
-    <div *ngIf="paymentSuccess" class="success-message">
-      <h3>{{userName}} Seu pagamento foi aprovado!</h3>
-      <p>Obrigado por participar da nossa história ❤ .</p>
-    </div>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
+
+  </div>
+
+  <div *ngIf="paymentSuccess" class="success-message">
+    <h3>{{userName}} Seu pagamento foi aprovado!</h3>
+    <p>Obrigado por participar da nossa história ❤ .</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
   }
-  
+
 
 </div>
