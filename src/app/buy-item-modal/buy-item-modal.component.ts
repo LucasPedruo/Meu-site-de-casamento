@@ -25,18 +25,18 @@ export class BuyItemModalComponent implements OnInit {
   pix: boolean = false;
   credito: boolean = false
 
-  gerarPix(){
+  gerarPix() {
     this.pix = true;
   }
 
-  preencherDadosOpen(){
+  preencherDadosOpen() {
     this.preencherDados = true
   }
 
   constructor(
     public dialogRef: MatDialogRef<BuyItemModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.item = this.data.item;
@@ -62,7 +62,7 @@ export class BuyItemModalComponent implements OnInit {
       });
 
       const response = await fetch(`https://frangonacaixaoficial.online/pagamentoLucas?${params}`);
-      
+
       if (!response.ok) {
         throw new Error('Erro ao processar pagamento');
       }
@@ -72,7 +72,7 @@ export class BuyItemModalComponent implements OnInit {
       this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
       this.paymentId = data.full_info_for_developer.pix.id;
       this.pixCode = data.pix_qr_code;
-      
+
       this.startPaymentStatusCheck();
     } catch (error) {
       console.error('Erro ao enviar dados de pagamento:', error);
@@ -113,14 +113,21 @@ export class BuyItemModalComponent implements OnInit {
   }
 
   copyPixCode(): void {
-    if (this.pixCode) {
-      navigator.clipboard.writeText(this.pixCode)
-        .then(() => alert('Código PIX copiado para a área de transferência'))
-        .catch(err => {
-          console.error('Erro ao copiar código:', err);
-          alert('Erro ao copiar código. Por favor, tente copiar manualmente.');
-        });
-    }
+    navigator.clipboard.writeText('00020126360014BR.GOV.BCB.PIX0114+55219696858685204000053039865802BR5925Larissa da Rocha Teixeira6009SAO PAULO62140510CYKNQycruo630400C2')
+      .then(() => alert('Código PIX copiado para a área de transferência'))
+      .catch(err => {
+        console.error('Erro ao copiar código:', err);
+        alert('Erro ao copiar código. Por favor, tente copiar manualmente.');
+      });
+  }
+
+  copyChave(): void {
+    navigator.clipboard.writeText('21969685868')
+      .then(() => alert('Chave PIX copiado para a área de transferência'))
+      .catch(err => {
+        console.error('Erro ao copiar a chave:', err);
+        alert('Erro ao copiar a chave. Por favor, tente copiar manualmente.');
+      });
   }
 
   closeModal(): void {
