@@ -125,7 +125,7 @@ export class BuyItemModalComponent implements OnInit {
 
   copyChave(): void {
     navigator.clipboard.writeText('21969685868')
-      .then(() => alert('Chave PIX copiado para a área de transferência'))
+      .then(() => alert('Chave PIX copiado para a área de transferência, basta abrir seu banco e efetuar o pagamento'))
       .catch(err => {
         console.error('Erro ao copiar a chave:', err);
         alert('Erro ao copiar a chave. Por favor, tente copiar manualmente.');
