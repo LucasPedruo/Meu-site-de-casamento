@@ -7,23 +7,43 @@
 <main>
     <section class="content">
 
-      <!--   <img width="150px" src="/logo-preta.png" alt="">
+        <div class="container">
+            <h2>Confirmação de Presença</h2>
 
-        <h1>
-            LARISSA 
-            &
-            LUCAS
-        </h1>
+            <form [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" formControlName="name" class="form-control">
+                    <div *ngIf="confirmationForm.get('name')?.invalid && confirmationForm.get('name')?.touched"
+                        class="error">
+                        Nome é obrigatório
+                    </div>
+                </div>
 
-        <p>Utilizamos inteligência artificial para confirmar sua presença via whatsapp.</p>
-        <p>É imprecindivel que confirme a sua presença até o dia <strong>02/04/2025</strong>. </p>
+                <div class="form-group">
+                    <label>Você irá comparecer?</label>
+                    <div class="radio-options">
+                        <label>
+                            <input type="radio" formControlName="willAttend" [value]="true"> Sim
+                        </label>
+                        <label>
+                            <input type="radio" formControlName="willAttend" [value]="false"> Não
+                        </label>
+                    </div>
+                </div>
 
-        <button>
-            CONFIRME SUA PRESENÇA
-        </button> -->
+                <button type="submit" [disabled]="confirmationForm.invalid" class="submit-btn">Confirmar</button>
+            </form>
 
-        <h3>Volte em breve...</h3>
-    
+            <div *ngIf="submitted" class="success-message">
+                <p>Obrigado pela sua resposta!</p>
+            </div>
+
+            <div *ngIf="error" class="error-message">
+                <p>Houve um erro ao enviar sua confirmação. Por favor, tente novamente.</p>
+            </div>
+        </div>
+
 
     </section>
 </main>
