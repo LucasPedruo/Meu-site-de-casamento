@@ -1,30 +1,24 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-export interface Confirmacao {
-  name: string;
-  willAttend: boolean;
-  timestamp: Date;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfirmacaoPresencaService {
-  private apiUrl = 'https://script.google.com/macros/s/AKfycbxx8aji4NsdkGx4Lry0WOAhIgbDBue6_wkQeaiu4eJu/dev';
+  private apiUrl = 'https://script.google.com/macros/s/AKfycbzZjUvTX0yy8XorhtQQKxy84AUYQ78ZzRgSKwtC0GG4cHZAr6EDV6E7HDGDu8YjrTtINg/exec';
 
   constructor(private http: HttpClient) {}
 
-  submitConfirmation(confirmation: Confirmacao): Observable<any> {
-    const params = new URLSearchParams({
+  submitConfirmation(confirmation: { name: string, willAttend: boolean, timestamp: Date }): Observable<any> {
+    const body = {
       name: confirmation.name,
-      willAttend: confirmation.willAttend.toString(),
+      willAttend: confirmation.willAttend,
       timestamp: confirmation.timestamp.toISOString()
-    });
+    };
 
-    return this.http.get(`${this.apiUrl}?${params.toString()}`, { responseType: 'text' }).pipe(
+    return this.http.post(this.apiUrl, body, { responseType: 'text' }).pipe(
       map(response => {
         try {
           return JSON.parse(response);
