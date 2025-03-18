@@ -13,7 +13,7 @@ export interface Confirmacao {
   providedIn: 'root'
 })
 export class ConfirmacaoPresencaService {
-  private apiUrl = 'https://script.google.com/macros/s/AKfycbzyyR30g7eQ_f3d73huMIHw188cHsxsF5JvGr5hH6rgVxKf7ZryJtG2A20QAW55mODb_Q/exec';
+  private apiUrl = 'https://script.google.com/macros/s/AKfycbxx8aji4NsdkGx4Lry0WOAhIgbDBue6_wkQeaiu4eJu/dev';
 
   constructor(private http: HttpClient) {}
 
