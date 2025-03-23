@@ -55,10 +55,16 @@ main {
         gap: 20px;
 
         button{
+            width: 100%;
             padding: 15PX 40PX;
             background-color: black;
             color: white;
             border: none;
+        }
+
+        .form{
+            display: flex;
+            flex-direction: column;
         }
 
     }
