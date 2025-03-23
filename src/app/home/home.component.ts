@@ -39,4 +39,8 @@ irParaDressCode(){
     this.router.navigate(['/sugestao-de-traje']);
 }
 
+irParaConfirmacao(){
+    this.router.navigate(['/confirmacao-de-presenca']);
+}
+
 }

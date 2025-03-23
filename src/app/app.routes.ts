@@ -11,7 +11,6 @@ export const routes: Routes = [
   { path: 'inicio', component: HomeComponent },
   { path: 'lista-de-presente', component: ListaDePresentesComponent },
   { path: 'cerimonia-e-festa', component: CerimoniaEFestaComponent },
-  { path: 'confirmacao-de-presenca', component: ConfirmacaoDePresencaComponent },
   { path: 'sugestao-de-traje', component: SugestaoDeTrajeComponent },
   { path: 'confirmacao-de-presenca', component: ConfirmacaoDePresencaComponent },
 ];
