@@ -43,9 +43,8 @@ main {
     margin: 0 auto;
 
     .content {
-        padding-top: 40px;
+        padding-top: 100px;
         display: flex;
-        min-height: 70vh;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -97,7 +96,7 @@ main {
         padding: 20px;
 
         .content {
-            padding-top: 0;
+            padding-top: 100px;
 
 
             button {
@@ -111,6 +110,11 @@ main {
 
 
         }
+    }
+
+    .container{
+        width: 100%;
+
     }
 }
 
@@ -183,18 +187,3 @@ main {
     }
   }
   
-  /* Estilos para os Snackbars */
-  ::ng-deep .success-snackbar {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  ::ng-deep .error-snackbar {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  ::ng-deep .warning-snackbar {
-    background-color: #ff9800;
-    color: white;
-  }
