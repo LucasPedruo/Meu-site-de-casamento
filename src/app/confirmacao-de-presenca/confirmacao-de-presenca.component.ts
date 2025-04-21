@@ -402,7 +402,7 @@ export class ConfirmacaoDePresencaComponent {
   }
 } */
 
-  processarPessoa(pessoa: Pessoa): Observable<any> {
+/*   processarPessoa(pessoa: Pessoa): Observable<any> {
   const nomeNormalizado = pessoa.nome.trim();
 
   if (this.verificarSeJaConfirmado(nomeNormalizado)) {
@@ -478,8 +478,103 @@ export class ConfirmacaoDePresencaComponent {
       return of({ status: 'nao_convidado' });
     }
   }
-}
+} */
 
+  processarPessoa(pessoa: Pessoa): Observable<any> {
+    const nomeNormalizado = pessoa.nome.trim();
+  
+    return this.service.listSheet().pipe(
+      switchMap((dados: any[]) => {
+        const nomeJaConfirmado = dados.some(entry => entry.Nome?.toLowerCase().trim() === nomeNormalizado.toLowerCase());
+  
+        if (nomeJaConfirmado) {
+          this._dialog.open(JaConfirmadoDialogComponent, {
+            data: { nome: nomeNormalizado }
+          });
+          return of({ status: 'ja_confirmado' });
+        }
+  
+        if (this.verificarSeConvidado(nomeNormalizado)) {
+          const dialogRefContato = this._dialog.open(ContatoInputDialogComponent, {
+            data: { nome: nomeNormalizado }
+          });
+  
+          return dialogRefContato.afterClosed().pipe(
+            switchMap(result => {
+              if (result && result.telefone) {
+                return this.service.createSheet(nomeNormalizado, pessoa.valor, result.telefone).pipe(
+                  map(response => {
+                    this._dialog.open(ConfirmacaoDialogComponent, {
+                      data: { nome: nomeNormalizado }
+                    });
+                    return { status: 'success', response };
+                  }),
+                  catchError(error => {
+                    console.error('Erro ao enviar confirmação:', error);
+                    return of({ status: 'error', error });
+                  })
+                );
+              } else {
+                return of({ status: 'cancelled' });
+              }
+            })
+          );
+        } else {
+          const nomesSimilares = this.encontrarNomesSimilares(nomeNormalizado);
+  
+          if (nomesSimilares.length > 0) {
+            const dialogRef = this._dialog.open(SugestaoNomeDialogComponent, {
+              data: { 
+                nomeDigitado: nomeNormalizado, 
+                sugestoes: nomesSimilares,
+                valor: pessoa.valor
+              }
+            });
+  
+            return dialogRef.afterClosed().pipe(
+              switchMap(result => {
+                if (result && result.confirmado) {
+                  const nomeSelecionado = result.nomeSelecionado;
+                  const nomeSelecionadoJaConfirmado = dados.some(entry => entry.Nome?.toLowerCase().trim() === nomeSelecionado.toLowerCase());
+  
+                  if (nomeSelecionadoJaConfirmado) {
+                    this._dialog.open(JaConfirmadoDialogComponent, {
+                      data: { nome: nomeSelecionado }
+                    });
+                    return of({ status: 'ja_confirmado' });
+                  }
+  
+                  return this.service.createSheet(nomeSelecionado, pessoa.valor, result.telefone).pipe(
+                    map(response => {
+                      this._dialog.open(ConfirmacaoDialogComponent, {
+                        data: { nome: nomeSelecionado }
+                      });
+                      return { status: 'success', response };
+                    }),
+                    catchError(error => {
+                      console.error('Erro ao enviar confirmação:', error);
+                      return of({ status: 'error', error });
+                    })
+                  );
+                } else if (result && result.contato) {
+                  this._dialog.open(ContatoDialogComponent);
+                  return of({ status: 'contato' });
+                } else {
+                  this._dialog.open(NaoConvidadoDialogComponent);
+                  return of({ status: 'nao_convidado' });
+                }
+              })
+            );
+          } else {
+            this._dialog.open(NaoConvidadoDialogComponent);
+            return of({ status: 'nao_convidado' });
+          }
+        }
+      })
+    );
+  }
+  
+  
 
   onSubmit() {
     if (!this.validarFormulario()) {

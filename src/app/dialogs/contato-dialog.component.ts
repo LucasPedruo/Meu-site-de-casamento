@@ -10,7 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
   template: `
     <h2 mat-dialog-title>Contato</h2>
     <mat-dialog-content>
-      <p>Entre em contato pelo WhatsApp: <strong>(21) 988460135</strong></p>
+      <p>Entre em contato pelo WhatsApp:       <a mat-button href="http://wa.me/5521988460135" target="_blank">Entrar em contato</a>
+      </p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button [mat-dialog-close]="true">Fechar</button>
@@ -18,5 +19,5 @@ import { MatButtonModule } from '@angular/material/button';
   `,
 })
 export class ContatoDialogComponent {
-  constructor(public dialogRef: MatDialogRef<ContatoDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<ContatoDialogComponent>) { }
 }

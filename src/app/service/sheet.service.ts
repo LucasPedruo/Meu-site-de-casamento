@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Sheet } from '../../app/models/sheet.model';
 import { Observable } from 'rxjs';
+export interface RegistroPlanilha {
+  Nome: string;
+  Valor?: string;
+  Telefone?: string;
+}
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +25,9 @@ export class SheetService {
   }
   
 
-  listSheet() {
-    return this.http.get(`${environment.CONNECTION_URL}`);
-  }
+listSheet(): Observable<RegistroPlanilha[]> {
+  return this.http.get<RegistroPlanilha[]>(`${environment.CONNECTION_URL}`);
+}
 
   deleteSheet(id: number) {
     return this.http.delete(`${environment.CONNECTION_URL}/${id}`);

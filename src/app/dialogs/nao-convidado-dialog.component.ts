@@ -14,13 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
       <p>Se acha que isso é um erro, por favor entre em contato conosco.</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button (click)="contato()">Entrar em contato</button>
+    <a mat-button href="http://wa.me/5521988460135" target="_blank">Entrar em contato</a>
+
       <button mat-button [mat-dialog-close]="true">Ok</button>
     </mat-dialog-actions>
   `,
 })
 export class NaoConvidadoDialogComponent {
-  constructor(public dialogRef: MatDialogRef<NaoConvidadoDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<NaoConvidadoDialogComponent>) { }
 
   contato() {
     this.dialogRef.close({ contato: true });

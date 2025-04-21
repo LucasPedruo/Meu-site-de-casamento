@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
       <p>Se não foi você quem confirmou, por favor, entre em contato conosco.</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button (click)="contato()">Entrar em contato</button>
+      <a mat-button href="http://wa.me/5521988460135" target="_blank">Entrar em contato</a>
       <button mat-button [mat-dialog-close]="true">Ok</button>
     </mat-dialog-actions>
   `,
