@@ -10,13 +10,14 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { Observable, forkJoin, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 
 import { ConfirmacaoDialogComponent } from '../dialogs/confirmacao-dialog.component';
 import { SugestaoNomeDialogComponent } from '../dialogs/sugestao-nome-dialog.component';
 import { JaConfirmadoDialogComponent } from '../dialogs/ja-confirmado-dialog.component';
 import { NaoConvidadoDialogComponent } from '../dialogs/nao-convidado-dialog.component';
 import { ContatoDialogComponent } from '../dialogs/contato-dialog.component';
+import { ContatoInputDialogComponent } from '../dialogs/contato-input-dialog.component';
 
 
 interface Pessoa {
@@ -262,7 +263,7 @@ export class ConfirmacaoDePresencaComponent {
     );
   }
 
-  processarPessoa(pessoa: Pessoa): Observable<any> {
+ /*  processarPessoa(pessoa: Pessoa): Observable<any> {
     const nomeNormalizado = pessoa.nome.trim();
     
     if (this.verificarSeJaConfirmado(nomeNormalizado)) {
@@ -318,7 +319,7 @@ export class ConfirmacaoDePresencaComponent {
         return of({ status: 'nao_convidado' });
       }
     }
-  }
+  } */
 
   validarFormulario(): boolean {
     for (const pessoa of this.pessoas) {
@@ -328,6 +329,78 @@ export class ConfirmacaoDePresencaComponent {
     }
     return true;
   }
+
+  // Update the processarPessoa method to handle phone number
+processarPessoa(pessoa: Pessoa): Observable<any> {
+  const nomeNormalizado = pessoa.nome.trim();
+  
+  if (this.verificarSeJaConfirmado(nomeNormalizado)) {
+    const dialogRef = this._dialog.open(JaConfirmadoDialogComponent, {
+      data: { nome: nomeNormalizado }
+    });
+    return of({ status: 'ja_confirmado' });
+  }
+  
+  if (this.verificarSeConvidado(nomeNormalizado)) {
+    // For direct matches, also collect phone number
+    const dialogRefContato = this._dialog.open(ContatoInputDialogComponent, {
+      data: { nome: nomeNormalizado }
+    });
+    
+    return dialogRefContato.afterClosed().pipe(
+      switchMap(result => {
+        if (result && result.telefone) {
+          return this.service.createSheet(nomeNormalizado, pessoa.valor, result.telefone).pipe(
+            map(response => {
+              const dialogRef = this._dialog.open(ConfirmacaoDialogComponent, {
+                data: { nome: nomeNormalizado }
+              });
+              return { status: 'success', response };
+            }),
+            catchError(error => {
+              console.error('Erro ao enviar confirmação:', error);
+              return of({ status: 'error', error });
+            })
+          );
+        } else {
+          return of({ status: 'cancelled' });
+        }
+      })
+    );
+  } else {
+    const nomesSimilares = this.encontrarNomesSimilares(nomeNormalizado);
+    
+    if (nomesSimilares.length > 0) {
+      const dialogRef = this._dialog.open(SugestaoNomeDialogComponent, {
+        data: { 
+          nomeDigitado: nomeNormalizado, 
+          sugestoes: nomesSimilares,
+          valor: pessoa.valor
+        }
+      });
+      
+      return dialogRef.afterClosed().pipe(
+        switchMap(result => {
+          if (result && result.confirmado) {
+            return this.service.createSheet(result.nomeSelecionado, pessoa.valor, result.telefone).pipe(
+              map(response => ({ status: 'success', response })),
+              catchError(error => of({ status: 'error', error }))
+            );
+          } else if (result && result.contato) {
+            this._dialog.open(ContatoDialogComponent);
+            return of({ status: 'contato' });
+          } else {
+            this._dialog.open(NaoConvidadoDialogComponent);
+            return of({ status: 'nao_convidado' });
+          }
+        })
+      );
+    } else {
+      const dialogRef = this._dialog.open(NaoConvidadoDialogComponent);
+      return of({ status: 'nao_convidado' });
+    }
+  }
+}
 
   onSubmit() {
     if (!this.validarFormulario()) {

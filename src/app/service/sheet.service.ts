@@ -8,14 +8,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SheetService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  createSheet(Nome: string, Status: string): Observable<Sheet> {
-    return this.http.post<Sheet>(`${environment.CONNECTION_URL}`, {
+  createSheet(Nome: string, Valor: string, Telefone: string = ''): Observable<any> {
+    return this.http.post(`${environment.CONNECTION_URL}`, {
       Nome,
-      Status,
+      Valor,
+      Telefone
     });
   }
+  
 
   listSheet() {
     return this.http.get(`${environment.CONNECTION_URL}`);
