@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
@@ -8,10 +8,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { Observable, forkJoin, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+import { ConfirmacaoDialogComponent } from '../dialogs/confirmacao-dialog.component';
+import { SugestaoNomeDialogComponent } from '../dialogs/sugestao-nome-dialog.component';
+import { JaConfirmadoDialogComponent } from '../dialogs/ja-confirmado-dialog.component';
+import { NaoConvidadoDialogComponent } from '../dialogs/nao-convidado-dialog.component';
+import { ContatoDialogComponent } from '../dialogs/contato-dialog.component';
+
 
 interface Pessoa {
   nome: string;
   valor: string;
+}
+
+interface ConvidadoData {
+  nome: string;
+  confirmado: boolean;
 }
 
 @Component({
@@ -25,20 +40,152 @@ interface Pessoa {
     MatInputModule, 
     ReactiveFormsModule, 
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './confirmacao-de-presenca.component.html',
   styleUrl: './confirmacao-de-presenca.component.scss',
 })
 export class ConfirmacaoDePresencaComponent {
   private _snackBar = inject(MatSnackBar);
+  private _dialog = inject(MatDialog);
+
+  listaConvidados: string[] = [
+    "Edson Asta",
+    "Elianai Pedro da Silva Brasil da Silva",
+    "Edson Brasil da silva",
+    "Sandro Porto",
+    "Rosane Moraes",
+    "jessica mello",
+    "Jeane santos",
+    "Ana Flávia",
+    "Lucas Sales",
+    "Caio Roberto Magalhães da silva",
+    "Leticia Farias",
+    "Gustavo Farias",
+    "Ana Lucia Santos Farias",
+    "Juliana Rocha",
+    "Nélio",
+    "Gabriele Rocha",
+    "Gabriella Agnelli",
+    "Eude Reis",
+    "Laís Candida",
+    "Johny Mafra",
+    "Joabe",
+    "Roseane Santos da Silva",
+    "Eliezer Pedro da Silva",
+    "Erika Cristina",
+    "Ana Julia",
+    "Samuel",
+    "Miriam",
+    "Brenda Guarino",
+    "Felipe Carvalho",
+    "Luiz Neto",
+    "Gilson Rocha",
+    "Rosilene rocha",
+    "Sonia Alves",
+    "Lincoln Medeiros",
+    "Marcio Carvalho",
+    "Michelly Alves",
+    "Guilherme Teixeira Ferreira",
+    "Joice Portela Teixeira Ferreira",
+    "Giovanni Teixeira Ferreira",
+    "Gustavo Teixeira Ferreira",
+    "Juliana Cardoso",
+    "Vítor Cardoso",
+    "Dulcineia agnelli calixto",
+    "Joel Calixto dos santos",
+    "Maycon Agnelli Calixto",
+    "Sávio",
+    "Herbenice",
+    "Isabel",
+    "Gabriela Santos do Carmo",
+    "Wesley Melo",
+    "Emanuelle Pereira",
+    "Milena Aguiar",
+    "Ualaston piano",
+    "Victoria Pereira da Silva",
+    "Sonia",
+    "João Carlos Cruz da Silva",
+    "Anadila Piano Pereira da Silva",
+    "Dulcineia agnelli calixto",
+    "Maycon Agnelli Calixto",
+    "Joel Calixto dos",
+    "Maria",
+    "Valdomiro",
+    "Edineia",
+    "Jocileide Portela Teixeira Dias Sá",
+    "José Enilson Dias Sá",
+    "João André Portela Teixeira Dias Sá",
+    "Josué Portela Teixeira Dias Sá",
+    "Joana Portela Teixeira Dias Sá",
+    "Rebeca Moreira Vieira",
+    "Ananda Piano",
+    "Aline Piano",
+    "Alexsandre dos Santos Ferreira",
+    "Arthur Piano",
+    "Karine Gomes",
+    "Mateus David",
+    "Dida",
+    "Edleuza Portela Gusmao",
+    "zenaide",
+    "maria pereira",
+    "cristina raquel",
+    "Matheus Moreira Vieira",
+    "Lídia",
+    "Jorge",
+    "Pedro Rodrigues da Silva",
+    "Gabriela de oliveira da silva",
+    "Ageu",
+    "Vania",
+    "Cíntia Ramon",
+    "Julia Ramon",
+    "Fabiano Pastor",
+    "Manuela Ramon",
+    "Alzira Piano Pereira",
+    "João Batista dos Santos Pereira",
+    "Daniel Viana",
+    "Daniele Mota",
+    "Eneas Ferreira da silva",
+    "Amanda Padula",
+    "Vinicius Bernardo",
+    "Rodrigo de Almeida da Rocha",
+    "Andreia",
+    "Isabella Rocha",
+    "Josiane",
+    "Joan",
+    "Vinicius Guedes"
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
     private service: SheetService,
   ) { }
 
+  ngOnInit() {
+    this.carregarDadosPlanilha();
+  }
+
+  carregarDadosPlanilha() {
+    this.carregando = true;
+    this.service.listSheet().subscribe({
+      next: (response: any) => {
+        this.dadosPlanilha = response.map((item: any) => ({
+          nome: item.Nome,
+          confirmado: !!item.Status && item.Status.trim() !== ''
+        }));
+        this.carregando = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar dados da planilha:', error);
+        this.carregando = false;
+      }
+    });
+  }
+
   pessoas: Pessoa[] = [{ nome: '', valor: '' }];
+  dadosPlanilha: ConvidadoData[] = [];
+  carregando = true;
 
   adicionarPessoa() {
     this.pessoas.push({ nome: '', valor: '' });
@@ -47,6 +194,129 @@ export class ConfirmacaoDePresencaComponent {
   removerPessoa(index: number) {
     if (this.pessoas.length > 1) {
       this.pessoas.splice(index, 1);
+    }
+  }
+
+  calcularSimilaridade(s1: string, s2: string): number {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    
+    const costs: number[] = [];
+    for (let i = 0; i <= s1.length; i++) {
+      let lastValue = i;
+      for (let j = 0; j <= s2.length; j++) {
+        if (i === 0) {
+          costs[j] = j;
+        } else {
+          if (j > 0) {
+            let newValue = costs[j - 1];
+            if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
+              newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+            }
+            costs[j - 1] = lastValue;
+            lastValue = newValue;
+          }
+        }
+      }
+      if (i > 0) {
+        costs[s2.length] = lastValue;
+      }
+    }
+    return costs[s2.length];
+  }
+
+  encontrarNomesSimilares(nome: string): string[] {
+    if (!nome || nome.trim().length < 3) return [];
+    
+    return this.listaConvidados
+      .filter(convidado => {
+        // Verificar se o nome digitado é parte do nome completo
+        if (convidado.toLowerCase().includes(nome.toLowerCase())) {
+          return true;
+        }
+        
+        // Verificar primeiro nome
+        const primeiroNomeDigitado = nome.split(' ')[0].toLowerCase();
+        const primeiroNomeConvidado = convidado.split(' ')[0].toLowerCase();
+        
+        if (primeiroNomeDigitado === primeiroNomeConvidado) {
+          return true;
+        }
+        
+        // Verificar similaridade (distância de Levenshtein)
+        const distancia = this.calcularSimilaridade(nome, convidado);
+        return distancia <= 3; // Tolerância de até 3 caracteres diferentes
+      })
+      .slice(0, 5); // Limitar a 5 sugestões
+  }
+
+  verificarSeJaConfirmado(nome: string): boolean {
+    return this.dadosPlanilha.some(item => 
+      item.nome.toLowerCase() === nome.toLowerCase() && item.confirmado
+    );
+  }
+
+  verificarSeConvidado(nome: string): boolean {
+    return this.listaConvidados.some(convidado => 
+      convidado.toLowerCase() === nome.toLowerCase()
+    );
+  }
+
+  processarPessoa(pessoa: Pessoa): Observable<any> {
+    const nomeNormalizado = pessoa.nome.trim();
+    
+    if (this.verificarSeJaConfirmado(nomeNormalizado)) {
+      const dialogRef = this._dialog.open(JaConfirmadoDialogComponent, {
+        data: { nome: nomeNormalizado }
+      });
+      return of({ status: 'ja_confirmado' });
+    }
+    
+    if (this.verificarSeConvidado(nomeNormalizado)) {
+      return this.service.createSheet(nomeNormalizado, pessoa.valor).pipe(
+        map(response => {
+          const dialogRef = this._dialog.open(ConfirmacaoDialogComponent, {
+            data: { nome: nomeNormalizado }
+          });
+          return { status: 'success', response };
+        }),
+        catchError(error => {
+          console.error('Erro ao enviar confirmação:', error);
+          return of({ status: 'error', error });
+        })
+      );
+    } else {
+      const nomesSimilares = this.encontrarNomesSimilares(nomeNormalizado);
+      
+      if (nomesSimilares.length > 0) {
+        const dialogRef = this._dialog.open(SugestaoNomeDialogComponent, {
+          data: { 
+            nomeDigitado: nomeNormalizado, 
+            sugestoes: nomesSimilares,
+            valor: pessoa.valor
+          }
+        });
+        
+        return dialogRef.afterClosed().pipe(
+          map(result => {
+            if (result && result.confirmado) {
+              return this.service.createSheet(result.nomeSelecionado, pessoa.valor).pipe(
+                map(response => ({ status: 'success', response })),
+                catchError(error => of({ status: 'error', error }))
+              );
+            } else if (result && result.contato) {
+              this._dialog.open(ContatoDialogComponent);
+              return of({ status: 'contato' });
+            } else {
+              this._dialog.open(NaoConvidadoDialogComponent);
+              return of({ status: 'nao_convidado' });
+            }
+          })
+        );
+      } else {
+        const dialogRef = this._dialog.open(NaoConvidadoDialogComponent);
+        return of({ status: 'nao_convidado' });
+      }
     }
   }
 
@@ -60,6 +330,28 @@ export class ConfirmacaoDePresencaComponent {
   }
 
   onSubmit() {
+    if (!this.validarFormulario()) {
+      const config: MatSnackBarConfig = {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      };
+      this._snackBar.open('Por favor, preencha todos os campos obrigatórios!', 'Fechar', config);
+      return;
+    }
+
+    this.processarPessoa(this.pessoas[0]).subscribe({
+      next: (result) => {
+        if (result.status === 'success') {
+          this.limparFormulario();
+          this.carregarDadosPlanilha();
+        }
+      }
+    });
+  }
+
+  /* 
+  
+    onSubmit() {
     if (!this.validarFormulario()) {
       const config: MatSnackBarConfig = {
         duration: 3000,
@@ -96,6 +388,8 @@ export class ConfirmacaoDePresencaComponent {
     }
   }
 
+  */
+
   private finalizarEnvio(sucessos: number, erros: number) {
     if (erros === 0) {
       const config: MatSnackBarConfig = {
@@ -123,4 +417,7 @@ export class ConfirmacaoDePresencaComponent {
   private limparFormulario() {
     this.pessoas = [{ nome: '', valor: '' }];
   }
+
+  
+
 }

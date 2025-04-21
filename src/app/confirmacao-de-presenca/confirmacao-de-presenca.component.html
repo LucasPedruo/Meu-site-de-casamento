@@ -9,34 +9,38 @@
       <h2>Confirmação de Presença</h2> <br>
       <p class="info-text">Atenção: A confirmação é individual. Por favor, adicione um nome por vez.</p>
       <br>
-<!--       <div *ngFor="let pessoa of pessoas; let i = index" class="form-container">
-        <div class="form">
-          <mat-form-field class="example-full-width">
-            <mat-label>Nome</mat-label>
-            <input type="text" [(ngModel)]="pessoa.nome" name="nomeInput{{i}}" matInput placeholder="Nome">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Confirmação de presença</mat-label>
-            <mat-select [(ngModel)]="pessoa.valor" name="statusSelect{{i}}">
-              <mat-option value="sim">Irei</mat-option>
-              <mat-option value="nao">Não irei</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button *ngIf="pessoas.length > 1" type="button" class="remove-btn" (click)="removerPessoa(i)">
-            <mat-icon>remove_circle</mat-icon>
+      
+      <div *ngIf="carregando">
+        <p>Carregando dados, por favor aguarde...</p>
+      </div>
+
+      <div *ngIf="!carregando">
+        <div *ngFor="let pessoa of pessoas; let i = index" class="form-container">
+          <div class="form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Nome</mat-label>
+              <input type="text" [(ngModel)]="pessoa.nome" name="nomeInput{{i}}" matInput placeholder="Digite seu nome completo">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Confirmação de presença</mat-label>
+              <mat-select [(ngModel)]="pessoa.valor" name="statusSelect{{i}}">
+                <mat-option value="sim">Irei</mat-option>
+                <mat-option value="nao">Não irei</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button *ngIf="pessoas.length > 1" type="button" class="remove-btn" (click)="removerPessoa(i)">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="button-container">
+          <button type="button" class="add-btn" (click)="adicionarPessoa()">
+            <mat-icon>add_circle</mat-icon> Adicionar confirmação
           </button>
+          <button type="button" class="submit-btn" (click)="onSubmit()">Enviar</button>
         </div>
       </div>
-      
-      <div class="button-container">
-        <button type="button" class="add-btn" (click)="adicionarPessoa()">
-          <mat-icon>add_circle</mat-icon> Adicionar confirmação
-        </button>
-        <button type="button" class="submit-btn" (click)="onSubmit()">Enviar</button>
-      </div> -->
-
-      Desabilitado, por favor volte em breve!
-
     </div>
   </section>
 </main>
