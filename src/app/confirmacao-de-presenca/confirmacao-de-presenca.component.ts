@@ -163,7 +163,7 @@ export class ConfirmacaoDePresencaComponent {
     "Maria Pereira",
     "Mateus Coutinho",
     "Mateus David",
-    "Matheus Moreira Vieira",
+    "Matheus Vieira",
     "Maycon Agnelli Calixto",
     "Michelly Alves",
     "Milena Aguiar",
