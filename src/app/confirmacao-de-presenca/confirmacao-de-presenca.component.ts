@@ -98,7 +98,7 @@ export class ConfirmacaoDePresencaComponent {
     "Eliana Lomboni",
     "Elianai Pedro da Silva Brasil da Silva",
     "Eliezer Pedro da Silva",
-    "Ellen Teixeira",
+    "Elen Teixeira",
     "Elza Vieira",
     "Emanuelle Pereira",
     "Eneas Ferreira da silva",
