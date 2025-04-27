@@ -192,7 +192,7 @@ export class ConfirmacaoDePresencaComponent {
     "Vinicius Guedes",
     "Vinicius Veras",
     "Vítor Cardoso",
-    "Wagner Santos",
+    "Wagner Esquincalha",
     "Wesley Melo",
     "Zenaide Viana",
     "Patricia Assis",
