@@ -49,7 +49,7 @@ export class BuyItemModalComponent implements OnInit {
     }
 
     this.paymentDataSubmitted = true;
-    this.sendPaymentDataToAPI();
+    this.pix = false
   }
 
   private async sendPaymentDataToAPI() {
@@ -61,17 +61,17 @@ export class BuyItemModalComponent implements OnInit {
         item: this.item?.title
       });
 
-      const response = await fetch(`https://frangonacaixaoficial.online/pagamentoLucas?${params}`);
+/*       const response = await fetch(`https://frangonacaixaoficial.online/pagamentoLucas?${params}`);
 
       if (!response.ok) {
         throw new Error('Erro ao processar pagamento');
-      }
+      } */
 
-      const data = await response.json();
-      this.paymentUrl = data.checkout_init_point;
-      this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
-      this.paymentId = data.full_info_for_developer.pix.id;
-      this.pixCode = data.pix_qr_code;
+      //const data = await response.json();
+      //this.paymentUrl = data.checkout_init_point;
+      //this.pixUrl = 'data:image/png;base64,' + data.pix_qr_code_base64;
+      //this.paymentId = data.full_info_for_developer.pix.id;
+      //this.pixCode = data.pix_qr_code;
 
       this.startPaymentStatusCheck();
     } catch (error) {
@@ -83,13 +83,13 @@ export class BuyItemModalComponent implements OnInit {
 
   private startPaymentStatusCheck() {
     const checkPaymentStatus = setInterval(async () => {
-      try {
+      this.paymentSuccess = true;
+     /*  try {
         const response = await fetch(`https://frangonacaixaoficial.online/notificacaoLucas?id=${this.paymentId}`);
         const data = await response.json();
 
         if (data.status === 'approved') {
           clearInterval(checkPaymentStatus);
-          this.paymentSuccess = true;
         } else if (data.status === 'rejected') {
           clearInterval(checkPaymentStatus);
           alert('Pagamento rejeitado. Tente novamente.');
@@ -97,7 +97,7 @@ export class BuyItemModalComponent implements OnInit {
         }
       } catch (error) {
         console.error('Erro ao verificar status do pagamento:', error);
-      }
+      } */
     }, 2000);
 
     // Limpar o intervalo após 5 minutos para evitar chamadas infinitas
